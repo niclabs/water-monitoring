@@ -3,7 +3,7 @@
 // Date and time functions using a DS3231 RTC connected via I2C and Wire lib
 #include "RTClib.h"
 
-#define INTERRUPT_PIN   (19)
+#define INTERRUPT_PIN   (2)
 
 RTC_DS3231 rtc;
 
