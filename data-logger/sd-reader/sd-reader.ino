@@ -33,7 +33,7 @@ void loop() {
         float dummyLecture = 3.14159;
         outFile.print(dummyDate);
         outFile.print(",");
-        outFile.print(dummyLecture);
+        outFile.println(dummyLecture);
         outFile.close();
         Serial.println("Listo");
       } else {
