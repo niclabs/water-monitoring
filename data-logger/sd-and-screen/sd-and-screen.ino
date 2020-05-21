@@ -116,7 +116,8 @@ void writeData() {
   // Lectura del primer valor del arreglo
   file.print(data_buffer[0]);
   // Write ADC data to CSV record.
-  for (uint8_t i = 1; i < DATA_COUNT; i++) {
+  for (uint8_t i = 1; i < DATA_COUNT; i++)
+  {
     file.write(',');
     file.print(data_buffer[i]);
   }
@@ -128,13 +129,19 @@ void writeData() {
 // SD Error messages stored in flash.
 #define error(msg) sd.errorHalt(F(msg))
 
-void setup() {
+void setup()
+{
+
+  
   Serial.begin(9600);
   
   Serial.println(F("Setting screen... "));
   setup_screen();
   Serial.println(F("Done."));
   Serial.println(F("-----------------------\n"));
+
+
+  
   Serial.print(F("Setting SD... "));
   //setup_sd();
   Serial.println(F("Done."));
