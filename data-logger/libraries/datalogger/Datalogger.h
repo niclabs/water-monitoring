@@ -57,8 +57,8 @@ typedef int *(*dl_cback_t)(void *, dl_type_t, void *);
  * `read_raw` and passes it as output in the `read` function.
  * - optionally, a return type for the callback function
  *
- * By default, Sources are initialized with a S_NONE source type. Subclasses may
- * change it.
+ * By default, Sources are initialized with a SRC_NONE source type. Subclasses
+ * may change it.
  * */
 class Source {
 public:
