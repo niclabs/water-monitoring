@@ -92,7 +92,7 @@ const byte chipSelect = 10;
 // Log file base name.  Must be six characters or less.
 #define FILE_BASE_NAME "Data"
 // Pin where button is connected.
-#define BUTTON_PIN (6)
+#define BUTTON_PIN (2)
 
 
 // Write data header.

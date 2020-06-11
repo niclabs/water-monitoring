@@ -22,11 +22,11 @@ byte buttonState = 0;
 //--------------------User configuration------------------------------------------
 
 // SD chip select pin.
-const byte chipSelect = 10;
+const byte chipSelect = 4;
 // Log file base name.  Must be six characters or less.
 #define FILE_BASE_NAME "Data"
 // Pin where button is connected.
-#define BUTTON_PIN (6)
+#define BUTTON_PIN (2)
 
 
 const uint8_t DATA_COUNT = 4;
@@ -68,7 +68,7 @@ void setup() {
 
   Serial.begin(9600);
   
-  // Wait for USB Serial 
+  // Wait for USB Serial
   while (!Serial) {
     SysCall::yield();
   }
