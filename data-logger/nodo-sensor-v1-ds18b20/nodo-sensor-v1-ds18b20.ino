@@ -8,9 +8,7 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 // //##############################################
 // //#################### OLED ####################
-#include <SPI.h>
 // #include <U8g2lib.h>
-#include <Wire.h>
 
 // // Nano
 // #define DATA_PIN A4
@@ -63,12 +61,11 @@ DallasTemperature sensors(&oneWire);
 //#################################################
 //#################### SD_CARD ####################
 #include "SdFat.h" // Bill Greiman
-
 // File system object.
 SdFat sd;
 
 // Sensors
-const uint8_t DATA_COUNT = 2;
+const uint8_t DATA_COUNT = 1;
 static float data_buffer[DATA_COUNT] = {0};
 
 // Log file.
@@ -93,7 +90,7 @@ const byte chipSelect = 10;
 
 // Write data header.
 void writeHeader() {
-  String header_elem[DATA_COUNT+2] = {"realtime","unixtime","raw","value1"};
+  String header_elem[DATA_COUNT+2] = {F("time"),F("unix"),F("temp")};
   file.print(header_elem[0]);
   for (uint8_t i = 1; i < DATA_COUNT+2; i++) {
     file.write(',');
@@ -103,7 +100,7 @@ void writeHeader() {
 }
 
 // Log a data into buffer.
-void logData(uint8_t index, int data) {
+void logData(uint8_t index, float data) {
   data_buffer[index] = data;
 }
 //################################################
@@ -137,25 +134,6 @@ void writeData() {
 // SD Error messages stored in flash.
 #define error(msg) sd.errorHalt(F(msg))
 
-void printTitle() {
-  DateTime now = rtc.now();
-  Serial.print("\n\n[");
-  Serial.print(now.year(), DEC);
-  Serial.print('/');
-  Serial.print(now.month(), DEC);
-  Serial.print('/');
-  Serial.print(now.day(), DEC);
-  Serial.print(' ');
-  Serial.print(now.hour(), DEC);
-  Serial.print(':');
-  Serial.print(now.minute(), DEC);
-  Serial.print(':');
-  Serial.print(now.second(), DEC);
-  Serial.print("] Inicio del programa");
-  Serial.println();
-}
-
-
 //#################################################
 //####################  SET-UP ####################
 void setup() {
@@ -164,17 +142,16 @@ void setup() {
   //################################################
   //####################  Reloj ####################
   if (! rtc.begin()) {
-    Serial.println("Couldn't find RTC");
+    Serial.println(F("Couldn't find RTC"));
     while (1);
   }
-  Serial.println("Starting DS18B20 sensor...");
+  Serial.println(F("Starting DS18B20 sensor..."));
   sensors.begin();
-  Serial.println("Done");
+  Serial.println(F("Done"));
   if (rtc.lostPower()) {
-    Serial.println("RTC lost power, lets set the time!");
+    Serial.println(F("RTC lost power, lets set the time!"));
     rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
-  printTitle();
 
   //##############################################
   //#################### OLED ####################
@@ -275,8 +252,7 @@ void loop() {
     } else if (buttonState == SHORT_PRESS) {
       Serial.println(F("Reading from DS18B20"));
       sensors.requestTemperatures();
-      logData(0, sensors.requestTemperaturesByIndex(0));
-      logData(1, sensors.getTempCByIndex(0));
+      logData(0, sensors.getTempCByIndex(0));
       Serial.print(F("Writing to SD... "));
       writeData();
   
