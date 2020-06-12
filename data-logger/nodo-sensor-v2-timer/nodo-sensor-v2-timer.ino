@@ -32,25 +32,16 @@ static uint16_t data_buffer[DATA_COUNT] = {0};
 String header_elem[DATA_COUNT] = {"timestamp","analog1", "rtc_temp"};
 #define ANALOG_PIN A0
 
-// Log file.
-SdFile file;
+SdFile file;  // Log file.
 
 // Variables for button
-long prev = 0;
 byte buttonState = 0;
-#define LONG_PRESS_DURATION (2000)
-#define SHORT_PRESS (1)
-#define LONG_PRESS (2)
 
 //----------------------- SD User configuration ---------------------------------
 
-// SD chip select pin.
-const byte chipSelect = 4;
-// Log file base name.  Must be six characters or less.
-#define FILE_BASE_NAME "Data"
-// Pin where button is connected.
-#define BUTTON_PIN (2)
-
+const byte chipSelect = 4;    // SD chip select pin.
+#define FILE_BASE_NAME "Data" // Log file base name.  Must be six characters or less.
+#define BUTTON_PIN (2)        // Pin where button is connected.
 
 // Write data header.
 void writeHeader() {
@@ -70,11 +61,8 @@ void logData(uint8_t index, int data) {
 
 // Write data buffer to SD
 void writeData() {
-  // Lectura del primer valor del arreglo
-  file.print(data_buffer[0]);
-  // Write ADC data to CSV record.
-  for (uint8_t i = 1; i < DATA_COUNT; i++)
-  {
+  file.print(data_buffer[0]);                  // Lectura del primer valor del arreglo
+  for (uint8_t i = 1; i < DATA_COUNT; i++) {   // Write ADC data to CSV record.
     file.write(',');
     file.print(data_buffer[i]);
   }
@@ -83,8 +71,7 @@ void writeData() {
 
 //------------------------------------------------------------------------------
 
-// SD Error messages stored in flash.
-#define error(msg) sd.errorHalt(F(msg))
+#define error(msg) sd.errorHalt(F(msg))        // SD Error messages stored in flash.
 
 void setup_sd() {
   const uint8_t BASE_NAME_SIZE = sizeof(FILE_BASE_NAME) - 1;
@@ -97,12 +84,11 @@ void setup_sd() {
   delay(1000);
   pinMode(BUTTON_PIN, INPUT);
   Serial.print(F("Initializing SD ... "));
-  // Initialize at the highest speed supported by the board that is
-  // not over 50 MHz. Try a lower speed if SPI errors occur.
-  if (!sd.begin(chipSelect, SD_SCK_MHZ(50))) {
-    sd.initErrorHalt();
+  if (!sd.begin(chipSelect, SD_SCK_MHZ(50))) { // Initialize at the highest speed supported by the board that is
+    sd.initErrorHalt();                        // not over 50 MHz. Try a lower speed if SPI errors occur.
   }
   Serial.println(F("done"));
+  
   // Find an unused file name.
   if (BASE_NAME_SIZE > 6) {
     error("FILE_BASE_NAME too long");
@@ -124,8 +110,7 @@ void setup_sd() {
   Serial.println(fileName);
   Serial.println(F("Press button short to log data"));
   Serial.println(F("Mantain button pressed to stop logging"));
-  // Write data header.
-  writeHeader();
+  writeHeader();  // Write data header.
 }
 
 
@@ -138,18 +123,12 @@ DateTime now;
 void printTitle() {
   DateTime now = rtc.now();
   Serial.print("\n\n[");
-  Serial.print(now.year(), DEC);
-  Serial.print('/');
-  Serial.print(now.month(), DEC);
-  Serial.print('/');
-  Serial.print(now.day(), DEC);
-  Serial.print(' ');
-  Serial.print(now.hour(), DEC);
-  Serial.print(':');
-  Serial.print(now.minute(), DEC);
-  Serial.print(':');
-  Serial.print(now.second(), DEC);
-  Serial.print("] Inicio del programa");
+  Serial.print(now.year(), DEC);      Serial.print('/');
+  Serial.print(now.month(), DEC);     Serial.print('/');
+  Serial.print(now.day(), DEC);       Serial.print(' ');
+  Serial.print(now.hour(), DEC);      Serial.print(':');
+  Serial.print(now.minute(), DEC);    Serial.print(':');
+  Serial.print(now.second(), DEC);    Serial.print("] Inicio del programa");
   Serial.println();
 }
 
@@ -202,17 +181,14 @@ void setup() {
   interrupts();             // enable all interrupts
 }
 
-uint8_t count = 0; // rollover in ~30 seconds
+uint8_t count = 0;          // rollover in ~30 seconds
 
-ISR(TIMER1_OVF_vect)        // interrupt service routine that wraps a user defined function supplied by attachInterrupt
-{
-  TCNT1 = 3036;            // preload timer
+ISR(TIMER1_OVF_vect) {      // interrupt service routine that wraps a user defined function supplied by attachInterrupt
+  TCNT1 = 3036;             // preload timer
   buttonState = 1;
 }
 
 void loop() {
-  //showMeasurement(3.141592 + count, 2, "\xF8 C", "2020-02-30 10:34:56");
-  
   if (buttonState == 1) {
     Serial.println(F("Reading from Analog"));
     int turbidity = analogRead(ANALOG_PIN);
