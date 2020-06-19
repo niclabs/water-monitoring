@@ -51,7 +51,7 @@ const SerialSink sersink(sersink_input_types, 3, Serial);
 // u8x8 calls can be made to `scs_driver` object.
 int ScreenSink::write_str(char **str_inputs) {
   // str_inputs are in the same order as its corresponding datatypes
-  // from `sersink_input_types`
+  // from `screen_input_types`
   scs_driver.drawString(0, 0, "Last measurement");
   scs_driver.setCursor(1, 1);
   scs_driver.print(str_inputs[0]);
