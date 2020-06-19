@@ -25,27 +25,26 @@ I2C_CALLBACK_FUNCTION(
 
     *(uint64_t *)output_ptr = unixtime(y, m, d, hh, mm, ss););
 
+// We assume the RTC time is already set!
 I2CSource rtc =
-    I2CSource("rtc" /* name */, 0x68 /* ds3231 address */,
-              0 /* request command is null byte*/, 7 /* response size */,
-              rtc_to_unix /* callback */, T_U64);
+    I2CSource(0x68 /* ds3231 address */, 0 /* request command is null byte*/,
+              7 /* response size */, rtc_to_unix /* callback */, T_U64);
 
-AnalogSource turb = AnalogSource("turb" /* name */, A1 /* pin */,
-                                 NULL /* no callback  */, NULL);
+AnalogSource turb = AnalogSource(A1 /* pin */, NULL /* no callback  */, NULL);
 
 Source *sources[] = {&rtc, &turb};
-Datalogger dl(sources, 2 /* # of sources */);
+Datalogger dl(sources, 2 /* # of sources */, NULL, 0 /* # of sinks */);
 
 void setup() {
   Serial.begin(9600);
   date_str.reserve(19);
 
-  dl.begin(); // initializes necessary resources (e. g. Wire)
-  dl.list_sources();
+  // dl.begin(); // initializes necessary resources (e. g. Wire)
+  // dl.list_sources();
 }
 
 void loop() {
-  dl.print_read_all();
+  // dl.print_read_all();
   Serial.println("fecha rtc: " + date_str);
   Serial.println("--------------");
   delay(2000);
