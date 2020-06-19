@@ -190,6 +190,7 @@ char *dl_u16toa(uint16_t n, char *s) {
  *           ^ [exp] ^      [mantissa]
  *          sgn
  * **/
+#define DL_FLOAT_SIGN_MASK (1 << 31)
 
 // Float to Scientific notation-number string
 // At most, will use 14 chars in `buf`
