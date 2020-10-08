@@ -46,7 +46,7 @@ uint8_t ds18b20_addrs[][8] = {{0x28, 0x55, 0x9E, 0x0E, 0x21, 0x19, 0x01, 0xE4},
  **/
 float measure_thermistor(float vin) {
     // Equation derived from voltage divider above
-    return (1/M_THERMISTOR)*( RA_THERMISTOR*(VCC_THERMISTOR-vin)/vin - N_THERMISTOR );
+    return vin; //(1/M_THERMISTOR)*( RA_THERMISTOR*(VCC_THERMISTOR-vin)/vin - N_THERMISTOR );
 }
 
 // Temp Atlas
@@ -205,8 +205,9 @@ void measureTemp(int index) {
 #endif //USE_SHT20
 
     // Termistor
-    temp = measure_thermistor(5*analogRead(THERMISTOR_PIN)/1024.0);
-    Serial.print(temp, PRINT_NO_OF_DECIMALS);
+    //temp = measure_thermistor(5*analogRead(THERMISTOR_PIN)/1024.0);
+    //Serial.print(temp, DEC); //PRINT_NO_OF_DECIMALS);
+    Serial.print(analogRead(THERMISTOR_PIN));
     Serial.print(COL_SEP);
 
     // Atlas
