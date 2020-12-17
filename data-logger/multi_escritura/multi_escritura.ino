@@ -2,17 +2,11 @@
 #include "SdFat.h" // Bill Greiman
 #include <avr/sleep.h>
 #include "dataTypes.h"
-#include "SensorPayload.h"
 #include <SoftwareSerial.h>
-#include <SensorPayload.h>
 #include "RTClib.h"
 #include <OneWire.h> 
 #include <DallasTemperature.h>
 SoftwareSerial softSerial(8,9);
-
-// ------------------ SensorPayload --------------------
-#define BUFFER_SIZE 49
-SensorPayload sp(BUFFER_SIZE);
 
 // ---------------------- RTC --------------------------
 #define CLOCK_INTERRUPT_PIN 2
@@ -52,7 +46,7 @@ volatile uint16_t written_blocks;
 
 //------------------------ Sensors configuration variables -----------------------  
 // SENSING_FREQ_SECS must be less or equal to SENDING_FREQ_SECS
-#define SENSING_FREQ_SECS 5
+#define SENSING_FREQ_SECS 1
 #define SENDING_FREQ_SECS 30
 #define N_SENSORS 1
 /* Sensors present on the data logger. If there are repeated sensors on the datalogger,
