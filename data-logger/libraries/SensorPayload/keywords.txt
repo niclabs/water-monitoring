@@ -1,0 +1,15 @@
+#######################################
+# KEYWORD1: CLASS KEYWORD2: FUNC
+#######################################
+
+SensorPayload	KEYWORD1
+addTemperature  KEYWORD2
+addPH   KEYWORD2
+addEC   KEYWORD2
+addPressure KEYWORD2
+addTurbidity    KEYWORD2
+getPayload  KEYWORD2
+getSize KEYWORD2
+resetBuffer KEYWORD2
+
+
