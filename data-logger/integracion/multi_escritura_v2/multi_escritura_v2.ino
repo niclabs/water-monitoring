@@ -4,11 +4,14 @@
 #include "SensorPayload.h"
 #include <SoftwareSerial.h>
 #include "RTClib.h"
-#include <OneWire.h> 
+#include <OneWire.h>
 #include <DallasTemperature.h>
+#include <Adafruit_ADS1015.h> // ADC
 SoftwareSerial softSerial(8,9);
 
 // ------------------ SensorPayload --------------------
+#define SEND_AS_PRINT 0 // If 1, SensorPayload will not be used,
+                        // and data will be printed as text
 #define BUFFER_SIZE 49
 SensorPayload sp(BUFFER_SIZE);
 
@@ -24,10 +27,13 @@ volatile uint8_t alarm_flag;
 // ---------------------- DS18B20 ----------------------
 // DS18B20 setup variables
 #define ONE_WIRE_BUS 5
-// Setup a oneWire instance to communicate with any OneWire devices  
-OneWire oneWire(ONE_WIRE_BUS); 
-// Pass our oneWire reference to Dallas Temperature. 
+// Setup a oneWire instance to communicate with any OneWire devices
+OneWire oneWire(ONE_WIRE_BUS);
+// Pass our oneWire reference to Dallas Temperature.
 DallasTemperature sensors(&oneWire);
+
+// ---------------------- ADC ----------------------
+Adafruit_ADS1015 adc;     /* Use this for the 12-bit version */
 
 // --------------------- File configuration variables --------------------------------
 #define FILE_BASE_NAME "data"
@@ -51,23 +57,40 @@ SdBaseFile binFile;
 block_type *sd_block;
 volatile uint16_t written_blocks;
 
-//------------------------ Sensors configuration variables -----------------------  
+// ----------------------- SoftSerial sending -----------------------
+int n_sent, n_to_send;
+
+//------------------------ Sensors configuration variables -----------------------
 // SENSING_FREQ_SECS must be less or equal to SENDING_FREQ_SECS
 #define SENSING_FREQ_SECS 1
 #define SENDING_FREQ_SECS 50
-#define N_SENSORS 1
+#define N_SENSORS 5
 /* Sensors present on the data logger. If there are repeated sensors on the datalogger,
 write them multiple times in the array.
 For example, if there are 3 DS18B20 sensors, the array must contain the TEMP_DS18B20 value three times.
 */
 uint8_t registered_sensors[N_SENSORS] = {
+                                        TDS_GRAVITY,
+                                        PH_GRAVITY,
+                                        TURB_GROVE,
+                                        PRES_GRAVITY,
                                         TEMP_DS18B20
                                         };
 // Typedef of function to read values from sensors
 typedef float (*sensorValueFunction) (void);
 /* User defined functions to read data from the registered_sensors array. Must return float and receive 
-no parameters 
+no parameters
 */
+
+float adcReader(int channel) {
+    int16_t reading = adc.readADC_SingleEnded(channel); // return as RAW
+    return (float)reading;
+}
+
+float tdsValue() { return adcReader(0); }
+float phValue() { return adcReader(1); }
+float turbValue() { return adcReader(2); }
+float presValue() { return adcReader(3); }
 float ds18b20value() {
     sensors.requestTemperatures();
     float temp = sensors.getTempCByIndex(0);
@@ -81,6 +104,10 @@ sensors_functions = {logDataX, logDataY, logDataZ}
 */
 
 sensorValueFunction sensors_functions[N_SENSORS] = {
+                                                   tdsValue,
+                                                   phValue,
+                                                   turbValue,
+                                                   presValue,
                                                    ds18b20value
                                                    };
 
@@ -155,6 +182,28 @@ void renameBinFile() {
     Serial.println(F(" blocks"));
 }
 
+// -------------------------------- Send Function ------------------------------------
+int send_readings(block_type *sd_block, int next_to_send) {
+    int total_encoded = 0;
+    do {
+        int n_encoded = sp.encodeReadings(sd_block, next_to_send+total_encoded, BASE_MODE);
+        total_encoded += n_encoded;
+        int n_to_send = sp.getCurrentSize();
+        // TODO: Test IRL, may be better to send in chunks different to n_to_send.
+        int n_sent = softSerial.write(sp.getBuffer(), n_to_send);
+        if (n_sent != sp.getCurrentSize()) {
+            Serial.print(n_to_send);
+            Serial.print(F(" bytes expected to send, but only sent: "));
+            Serial.println(n_sent);
+            // raise an error ?
+        }
+        sp.resetBuffer(); // Idea: "sp.resetPointer()" instead
+                          // of memset'ing the buffer each time
+    } while (total_encoded < sd_block->count);
+    return 0;
+}
+
+
 // --------------------------------SD Setup ------------------------------------
 
 void setup_sd() {
@@ -178,10 +227,11 @@ void setup_sd() {
     }
     Serial.println(F("done"));
 }
+
 // ------------------------ Interruptions ---------------------------------------
 
 void interrupt_sense() {
-    alarm_flag |= SENSE_FLAG;    
+    alarm_flag |= SENSE_FLAG;
 }
 
 void interrupt_send() {
@@ -189,7 +239,7 @@ void interrupt_send() {
 }
 
 void interrupt_both() {
-    alarm_flag |= (SENSE_FLAG|SEND_FLAG);    
+    alarm_flag |= (SENSE_FLAG|SEND_FLAG);
 }
 
 // ------------------------ Sleep Routine ---------------------------------------
@@ -245,7 +295,7 @@ void logData(reading_type *rt, uint8_t pos) {
     rt->sensor = registered_sensors[pos];
     rt->ts = alarm_time;
     rt->val = sensors_functions[pos]();
-    Serial.print(F("."));    
+    Serial.print(F("."));
 }
 
 //-------------------------- Main Program ------------------------------------------
@@ -276,6 +326,10 @@ void setup() {
     // ---------------------- DS18B20 ----------------------
     Serial.println(F("Starting DS18B20 sensor..."));
     sensors.begin();
+    Serial.println(F("Done"));
+    // ---------------------- ADC ----------------------
+    Serial.println(F("Starting ADS1015..."));
+    adc.begin();
     Serial.println(F("Done"));
     // ---------------------- SD ----------------------
     setup_sd();
@@ -355,6 +409,7 @@ void loop() {
                         Serial.println("No hay registros!");
                         break;
                     }
+#if SEND_AS_PRINT
                     for(int i=0; i<sd_block->count; i++) {
                         Serial.print(sd_block->data[i].sensor);
                         Serial.print(" ");
@@ -364,6 +419,9 @@ void loop() {
                         Serial.print("; ");
                     }
                     Serial.println();
+#else // Real send (encoding)
+                    send_readings(sd_block, next_to_send /* = 0 */);
+#endif
                 }
                 binFile.close();
                 if (binName[BASE_NAME_SIZE + 2] != '9') {
@@ -381,7 +439,7 @@ void loop() {
             createBinFile();
             first_pending_file[0] = '#';
             first_pending_file[1] = '#';
-            first_pending_file[2] = '#';    
+            first_pending_file[2] = '#'; 
         }
         else if(pending_blocks) { // There are blocks in the current binary file that hasn't been sent
             Serial.println(F("There are pending blocks to send"));
@@ -407,6 +465,7 @@ void loop() {
                     Serial.println("No hay registros!");
                     break;
                 }
+#if SEND_AS_PRINT
                 for(int i=next_to_send; i<sd_block->count; i++) {
                     Serial.print(sd_block->data[i].sensor);
                     Serial.print(" ");
@@ -417,6 +476,10 @@ void loop() {
                 }
                 Serial.println();
                 next_to_send = 0;
+#else // Real send (encoding)
+                send_readings(sd_block, next_to_send);
+                next_to_send = 0;
+#endif
             }
             Serial.println("Terminé el archivo");
             binFile.close();
@@ -425,6 +488,7 @@ void loop() {
         }
         else { // There is data in buffer to send
             Serial.println(F("There is data in buffer to send"));
+#if SEND_AS_PRINT
             while(next_to_send < sd_block->count) {
                 Serial.print(sd_block->data[next_to_send].sensor);
                 Serial.print(" ");
@@ -435,6 +499,10 @@ void loop() {
                 next_to_send++;
             }
             Serial.println();
+#else // Real send (encoding)
+            send_readings(sd_block, next_to_send);
+            next_to_send = 0;
+#endif
         }
         alarm_flag &= ~SEND_FLAG;
     }
