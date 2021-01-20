@@ -84,6 +84,7 @@ while True:
     raw4 = float(raw4str)
     
     # print("log 1: {} ".format(raw1str))
+    
     # print("log 2: {} ".format(raw2str))
     # print("log 3: {} ".format(raw3str))
     # print("log 4: {} ".format(raw4str))
