@@ -12,9 +12,16 @@ import time
 import board
 import busio as io
 import pyrebase
+
+
+import os
+import glob
  
 # Import the ADS1x15 module.
 import Adafruit_ADS1x15
+
+os.system("modprobe w1-gpio")
+os.system("modprobe w1-therm")
 
 
 # Create an ADS1115 ADC (16-bit) instance.
@@ -90,18 +97,41 @@ while True:
     # print("log 4: {} ".format(raw4str))
     # print()
     
+    
+    time.sleep(2)
+    # Print the ADC values.
+    print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} | {4:>12} |'.format(*values))
+    # Pause for half a second.
+
+    
+    Directorios = glob.glob( "/sys/bus/w1/devices/28*/"+"*temperature")
+    n_sensores = len(Directorios)
+    temperatura=[-1,-1,-1]
+    if n_sensores >= 1:
+        for i in range(n_sensores):
+            fSensor = open(Directorios[i])
+
+            linSensor = fSensor.readlines()
+    
+            strTemp = linSensor[0][:5]
+            temperatura[i] = float(strTemp) / 1000.0
+
+            print("The temperature %d is %s celsius" % (i, temperatura[i]))
+
+        Directorios = glob.glob( "/sys/bus/w1/devices/28*/"+"*temperature")
+        n_sensores = len(Directorios) 
+    
     data = {
     "timestamp": values[4],
     "channel 1": raw1,
     "channel 2": raw2,
     "channel 3": raw3,
     "channel 4": raw4,
+    "ds18b20_1": temperatura[0],
+    "ds18b20_2": temperatura[1],
+    "ds18b20_3": temperatura[2],
     }
+
     db.child("datalogger").child("1-set").set(data)
-    db.child("datalogger").child("2-push").push(data)
-    
-    time.sleep(2)
-    # Print the ADC values.
-    print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} | {4:>12} |'.format(*values))
-    # Pause for half a second.
+    db.child("datalogger").child("2-push").push(data)   
     time.sleep(1)
