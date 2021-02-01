@@ -45,6 +45,7 @@ adc = Adafruit_ADS1x15.ADS1015()
 # See table 3 in the ADS1015/ADS1115 datasheet for more info on gain.
 GAIN = 1
 
+#%%%%%% dejar tutorial
 config = {
  "apiKey": "Q1Efd77KWUK60suxePFpIPo9tZvoqidnI2rl4SmL",
  "authDomain": "water-monitoring-46b05.firebaseapp.com",
@@ -116,7 +117,7 @@ while True:
             strTemp = linSensor[0][:5]
             temperatura[i] = float(strTemp) / 1000.0
 
-            print("The temperature %d is %s celsius" % (i, temperatura[i]))
+            # print("The temperature %d is %s celsius" % (i, temperatura[i]))
 
         Directorios = glob.glob( "/sys/bus/w1/devices/28*/"+"*temperature")
         n_sensores = len(Directorios) 
@@ -131,7 +132,8 @@ while True:
     "ds18b20_2": temperatura[1],
     "ds18b20_3": temperatura[2],
     }
-
+    print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} | {4:>12} |'.format(*values))
+    print('{0:>6} | {1:>6} | {2:>6} |'.format(*temperatura))
     db.child("datalogger").child("1-set").set(data)
     db.child("datalogger").child("2-push").push(data)   
     time.sleep(1)
