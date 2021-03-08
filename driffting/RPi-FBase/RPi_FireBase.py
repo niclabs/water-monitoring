@@ -138,7 +138,24 @@ while True:
         tf=time.time()
     # print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} | {4:>12} |'.format(*values))
     # print('{0:>6} | {1:>6} | {2:>6} |'.format(*temperatura))
-    db.child("datalogger").child("1-set").set(data)
-    db.child("datalogger").child("2-push").push(data)   
+
+    # Se envían los datos a la realtime database de firebase.
+    try:
+        db.child("datalogger").child("1-set").set(data)
+        db.child("datalogger").child("2-push").push(data)   
+        last_sent = time.time()
+
+    # Si no es posible subir los datos, printea el mensaje de error en el log.
+    except:
+        print('Ocurrió un error al subir la data a FireBase. Por favor chequear la conexión a internet del dispositivo y las reglas de escritura de la Real Time DataBase')
+        print('El último dato se envió en', last_sent)
+
+    # Comprobación tipo watchdog timer, si no ha enviado datos a la nube en 15 minutos, se reinicia.
+    if time.time()-last_sent > 900:
+        print('Watchog timer reiniciará el dispositivo.')
+        time.sleep(1)
+        os.system('sudo reboot')
 
  
+# %%
+
