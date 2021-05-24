@@ -107,7 +107,7 @@ pyasn1-modules==0.2.8
 pycairo==1.16.2
 pycodestyle==2.4.0
 pycrypto==2.6.1
-pycryptodome==3.4.3
+pycryptodome==3.6.6
 pycups==1.9.73
 pyflakes==2.0.0
 pyftdi==0.52.9
