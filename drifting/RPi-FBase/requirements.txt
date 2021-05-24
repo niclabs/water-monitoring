@@ -127,7 +127,7 @@ python-dateutil==2.7.3
 python-jwt==2.0.1
 pytz==2020.5
 pyusb==1.1.1
-pyxdg==0.25
+pyxdg==0.26
 pyzmq==17.1.2
 qtconsole==4.3.1
 rainbowhat==0.1.0
