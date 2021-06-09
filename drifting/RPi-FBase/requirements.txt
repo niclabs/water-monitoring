@@ -97,7 +97,7 @@ pickleshare==0.7.5
 picraft==1.0
 piglow==1.2.5
 pigpio==1.44
-Pillow==8.1.1
+Pillow==8.2.0
 prompt-toolkit==1.0.15
 proto-plus==1.13.0
 protobuf==4.0.0rc2
