@@ -31,32 +31,41 @@ def get_data_pointers(buff):
 def mula(buff):
     return True
 
+def get_file_size(filename):
+    # https://docs.pycom.io/firmwareapi/micropython/uos/
+    # Returns file size in bytes
+    return os.stat(filename)[6]
 
-def save_text_file_sd(data: bytearray, index: int):
+def get_free_space(path):
+    # Returns available space in KiB
+    return os.getfree(path)
+
+def file_exists_in_folder(filename, folder):
+    lowercase_ls = list(map(lambda x: x.lower(), os.listdir(folder)))
+    return filename.lower() in lowercase_ls
+
+def save_text_file_sd(readings: list, index: int):
     '''
     Usage:
-    file_index, n_written = save_text_file_sd(recv_bytes, file_index)
-    if recv_len != n_written:
-        print("LoPy4 - SD - Not fully written: %d out of %d bytes" % (n_written, recv_len))
+    file_index = save_text_file_sd(decoded_data, file_index)
     '''
+    if get_free_space(SD_MOUNT_POINT) < 2:
+        print("LoPy4 - SD - Too litle space available!")
 
-    filename = SD_MOUNT_POINT + ('/data%d' % index) + '.txt'
-    with open(filename, 'wb') as f:
-        n_written = f.write(repr(data).encode('ascii'))
-    return index+1, n_written
+    filename = ('data%d' % index) + '.csv'
+    filepath = SD_MOUNT_POINT + '/' + filename
+    if file_exists_in_folder(filename, SD_MOUNT_POINT) and get_file_size(filename) > MAX_FILE_SIZE:
+        index += 1
+        filepath = SD_MOUNT_POINT + ('/data%d' % index) + '.csv'
+    print("LoPy4 - SD - Writing in", filepath)
+    with open(filepath, 'a') as f:
+        for reading in readings:
+            row = '%d;%d;%.1f\n' % reading
+            f.write(row)
+            f.flush()
+    os.sync()
+    return index
 
-def save_bin_file_sd(data: bytearray, index: int):
-    '''
-    Usage:
-    file_index, n_written = save_bin_file_sd(recv_bytes, file_index)
-    if recv_len != n_written:
-        print("LoPy4 - SD - Not fully written: %d out of %d bytes" % (n_written, recv_len))
-    '''
-
-    filename = SD_MOUNT_POINT + ('/data%d' % index) + '.bin'
-    with open(filename, 'wb') as f:
-        n_written = f.write(repr(data).encode('ascii'))
-    return index+1, n_written
 
 print("LoPy4 - Initializing communication values...")
 
@@ -105,7 +114,9 @@ while True:
         recv_bytes = recv_bytes[1:] # Ahora sí son el mismo mensaje
         print("LoPy4 - SERIAL_RX - actual recv msg (%d bytes): %s" % (recv_len, ubinascii.hexlify(recv_bytes)))
         print("LoPy4 - DECODED : ", end='')
-        print(decode_payload(recv_bytes))
+        decoded_data = decode_payload(recv_bytes)
+        print(decoded_data)
+        file_index = save_text_file_sd(decoded_data, file_index)
 
         # se obtiene el tamaño máximo disponible para un mensaje LoRaWAN
         print("LoPy4 - LoRaWAN - Data Rate: ", m_dr)

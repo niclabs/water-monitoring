@@ -66,6 +66,7 @@ s = NullSocket()
 
 print('========== Opening SPI SD Reader ===========')
 SD_MOUNT_POINT = '/sd_mnt'
+MAX_FILE_SIZE = 1024*1024 # Files no much more than 1MB
 '''
 SD SPI pins:
 - CS:   P9
@@ -75,7 +76,7 @@ SD SPI pins:
 '''
 sd = sdcard.SDCard(SPI(0), Pin('P9'))
 os.mount(sd, SD_MOUNT_POINT)
-file_index = len(os.listdir(SD_MOUNT_POINT))
+file_index = len(os.listdir(SD_MOUNT_POINT)) # Always a fresh index
 
 #SD_BLOCK_SIZE = 512
 #sd_buffer = bytearray(SD_BLOCK_SIZE)
