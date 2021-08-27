@@ -12,7 +12,6 @@ import time
 import math
 from machine import Pin
 from lib.error_check import check_fletcher16
-from machine import SD
 from payload_decoder import decode_payload
 
 """
@@ -67,7 +66,7 @@ print('========== Opening Expansion board SD Reader ===========')
 SD_MOUNT_POINT = '/sd_mnt'
 MAX_FILE_SIZE = 1024*1024 # Files no much more than 1MB
 # https://docs.pycom.io/firmwareapi/pycom/machine/sd/
-sd = SD()
+sd = machine.SD()
 os.mount(sd, SD_MOUNT_POINT)
 file_index = len(os.listdir(SD_MOUNT_POINT)) # Always a fresh index
 
@@ -76,11 +75,19 @@ file_index = len(os.listdir(SD_MOUNT_POINT)) # Always a fresh index
 
 print('========== Starting Serial UART configuration ===========')
 # Configure second UART bus on pins P3(TX1) and P4(RX1)
-uart = machine.UART(1, baudrate=19200, bits=8, parity=None, stop=1, pins=('P3', 'P4'))
+print('[boot.py before uart] SD dir contents at', SD_MOUNT_POINT, ':', os.listdir(SD_MOUNT_POINT))
+uart = machine.UART(1, baudrate=19200, bits=8, parity=None, stop=1, pins=('P3', 'P6'))
+print('[boot.py after uart] SD dir contents at', SD_MOUNT_POINT, ':', os.listdir(SD_MOUNT_POINT))
+# Si el contenido de la carpeta no es el mismo, probablemente UART está pisando
+# alguno de los pines que necesita la LoPy para hablar con la SD:
+# https://docs.pycom.io/firmwareapi/pycom/machine/sd/ 
 
 print('========== Starting PIN wakeup configuration ============')
 #p_in = Pin('P10', mode=Pin.OUT, pull=None, alt=-1)
-machine.pin_sleep_wakeup(['P4'], machine.WAKEUP_ALL_LOW, False)
+# P4 lo usa la tarjeta de expansión para SD
+# https://docs.pycom.io/firmwareapi/pycom/machine/#
+#machine.pin_sleep_wakeup(['P4'], machine.WAKEUP_ALL_LOW, False) 
+machine.pin_sleep_wakeup(['P6'], machine.WAKEUP_ALL_LOW, False)
 #machine.enable_irq()
 
 pycom.heartbeat(False)

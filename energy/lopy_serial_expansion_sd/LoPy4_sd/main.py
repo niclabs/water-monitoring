@@ -57,13 +57,22 @@ def save_text_file_sd(readings: list, index: int):
     if file_exists_in_folder(filename, SD_MOUNT_POINT) and get_file_size(filename) > MAX_FILE_SIZE:
         index += 1
         filepath = SD_MOUNT_POINT + ('/data%d' % index) + '.csv'
+    #print('LoPy4 - SD dir contents before write:', os.listdir(SD_MOUNT_POINT))
     print("LoPy4 - SD - Writing in", filepath)
     with open(filepath, 'a') as f:
         for reading in readings:
             row = '%d;%d;%.1f\n' % reading
             f.write(row)
-            f.flush()
+        print("LoPy4 - SD - Flushing")
+        f.flush()
     os.sync()
+    print("LoPy4 - SD - Filesystems Sync'd")
+    #print('LoPy4 - SD dir contents after write:', os.listdir(SD_MOUNT_POINT))
+    # Revisar lo escrito
+    """
+    with open(filepath, 'r') as f:
+        print('LoPy4 - SD written content file:', f.read())
+    """
     return index
 
 
@@ -74,7 +83,6 @@ m_dr = DATA_RATE
 print("LoPy4 - LoRaWAN - Initial Data Rate: ", m_dr)
 lorawan_mtu = get_lorawan_maximum_payload_size(m_dr)
 print("LoPy4 - LoRaWAN - Initial Maximum Payload Size: %d bytes" % lorawan_mtu)
-
 
 print("LoPy4 - Starting Loop...")
 a = 1
@@ -109,7 +117,7 @@ while True:
             print("LoPy4 - SERIAL_RX - bytes recv: %s" % ubinascii.hexlify(recv_bytes))
             print("LoPy4 - SERIAL_RX - total recv_bytes: %d" % recv_len)
 
-    if(recv_len != 0):
+    if(recv_len > 0):
         print("LoPy4 - SERIAL_RX - Dropping 1st byte (Dummy RX)")
         recv_bytes = recv_bytes[1:] # Ahora sí son el mismo mensaje
         print("LoPy4 - SERIAL_RX - actual recv msg (%d bytes): %s" % (recv_len, ubinascii.hexlify(recv_bytes)))
