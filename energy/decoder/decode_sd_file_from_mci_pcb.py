@@ -1,3 +1,5 @@
+#/opt/anaconda3/bin/python
+
 import payloadDecoder as pd
 import unittest
 import base64
@@ -7,7 +9,8 @@ def bitstring_to_bytes(s):
 
 
 print("---------------- file content")
-with open("data250.bin", mode='rb') as file: # b is important -> binary
+with open("./data_05nov/data005.bin", mode='rb') as file: # b is important -> binary
+#with open("./data_oct/data082.bin", mode='rb') as file: # b is important -> binary
     fileContent = file.read()
 print(type(fileContent))
 print(fileContent)
@@ -25,6 +28,7 @@ print("---------------- b64 string")
 b64_string = base64.b64encode(fileContent).decode('ascii')
 print(type(b64_string))
 print(b64_string)
+
 
 print("---------------- decoded payload from file")
 res = pd.decode_payload(b64_string)
