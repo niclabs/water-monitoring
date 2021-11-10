@@ -1,7 +1,9 @@
 #ifndef SensorPayload_h
 #define SensorPayload_h
 
+#if defined(ARDUINO)
 #include "Arduino.h"
+#endif // defined(ARDUINO)
 #include <stdint.h>
 #include "dataTypes.h"
 
@@ -33,4 +35,4 @@ class SensorPayload {
         void encodeDiferentialSensingUnit(uint8_t sensor,  uint16_t first_ts, float first_val, uint16_t second_ts, float second_val);
 };
 
-#endif
+#endif // SensorPayload_h
