@@ -4,7 +4,7 @@
 #include "SensorPayload.h"
 #include <SoftwareSerial.h>
 #include "RTClib.h"
-#include <OneWire.h> 
+#include <OneWire.h>
 
 #define USE_DS18B20 1
 
@@ -437,11 +437,12 @@ void loop() {
         // <debug>
         // Print 20 bytes
         Serial.print("# readings in sd_block: ");
-        Serial.println(sd_block->-count, DEC);
+        Serial.println(sd_block->count, DEC);
         Serial.print("# bytes in reading_type: ");
         Serial.println(sizeof(reading_type), DEC);
+        char *ptr = (char*)sd_block->data;
         for (uint8_t i=0; i<20; i++) {
-            Serial.print(sd_block->data[sd_block], HEX);
+            Serial.print(ptr[i], HEX);
         }
         Serial.println();
         // </debug>
