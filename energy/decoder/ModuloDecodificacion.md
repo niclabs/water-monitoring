@@ -103,3 +103,15 @@ Luego de la decodificación, se entrega una lista con lecturas. El número de le
 | Gravity: Analog Electrical Conductivity Meter    | Electroconductividad | 0101      | 10 - 100 mS/cm | ±5%    | |
 | Gravity: Analog TDS Sensor/Meter for Arduino     | Electroconductividad | 0110      | 0 - 1000 ppm   | ±10%   | |
 | Grove: Turbidity Sensor (Meter) for Arduino V1.0 | Turbidez             | 0111      |                |        | |
+
+## Debugging
+El módulo `payloadVerboseDecoder` provee la misma funcionalidad que `payloadDecoder`, pero mostrando la información de cada paquete de datos decodificado.
+Para utilizarlo, basta reemplazar la línea
+```python
+import payloadDecoder as pd
+```
+por
+```python
+import payloadVerboseDecoder as pd
+```
+

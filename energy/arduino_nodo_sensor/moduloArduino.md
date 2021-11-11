@@ -115,4 +115,7 @@ Finalmente, se define el arreglo de sensorValueFunction sensors_functions, el cu
 En esta sección, se definen funciones asociadas a distintas tareas dentro del Nodo Sensor. Las funciones están documentadas en el código, especificando la tarea que realizan. Cabe destacar que, debido a la arquitectura del programa desarrollado en el Arduino, las funciones trabajan con las variables globales definidas en la sección anterior, por lo que generalmente no reciben parámetros y modifican estos valores a lo largo de la ejecución.
 
 
+## Debugging
+La carpeta `decode_sd_binaries` contiene el archivo `lectura_datos.cpp`, el cual una vez compilado decodifica un directorio que contenga archivos binarios de bloques de lecturas de datos. *Ojo:* estos archivos binarios son los que se almacenan en la SD (son arreglos de `reading_type`), **no son** paquetes de datos codificados con `SensorPayload`.
+Se incluye un ejecutable `lectura_datos` compilado sobre GNU/Linux x86_64
 
