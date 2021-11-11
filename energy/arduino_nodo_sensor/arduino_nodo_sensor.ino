@@ -7,6 +7,16 @@
 #include <OneWire.h> 
 #include <DallasTemperature.h>
 
+/* Using temperature sensor is optional.
+ * If USE_DS18B20 is set to 0, a dummy temperature
+ * will be given each call (check function ds18b20value)
+ * */
+#define USE_DS18B20 1
+
+#if USE_DS18B20
+#include <DallasTemperature.h>
+#endif
+
 // ----------------- Debug option ----------------------
 #define DEBUG 1
 #if DEBUG
@@ -26,8 +36,10 @@ SoftwareSerial softSerial(8,9);
 #define ONE_WIRE_BUS 3
 // Setup a oneWire instance to communicate with any OneWire devices  
 OneWire oneWire(ONE_WIRE_BUS); 
+#if USE_DS18B20
 // Pass our oneWire reference to Dallas Temperature. 
 DallasTemperature sensors(&oneWire);
+#endif
 
 // ------------------ SensorPayload --------------------
 #define N_READINGS_ENCODE 7
@@ -86,8 +98,14 @@ uint8_t registered_sensors[N_SENSORS] = {
 no parameters 
 */
 float ds18b20value() {
+#if USE_DS18B20
     sensors.requestTemperatures();
     float temp = sensors.getTempCByIndex(0);
+#else
+    static int call_number = 1;
+    float temp = 0.0 + call_number;
+    call_number++;
+#endif
     return temp;
 }
 
@@ -368,10 +386,12 @@ void setup() {
     rtc.clearAlarm(2);
     elapsed_time = 0;
     alarm_flag = 0;
+#if USE_DS18B20
     // ---------------------- DS18B20 ----------------------
     debugPrintln(F("Starting DS18B20 sensor..."));
     sensors.begin();
     debugPrintln(F("Done"));
+#endif
     // ---------------------- SD ----------------------
     setup_sd();
     pending_blocks = 0;
