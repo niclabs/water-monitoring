@@ -6,7 +6,7 @@
 #include "RTClib.h"
 #include <OneWire.h>
 
-#define USE_DS18B20 1
+#define USE_DS18B20 0
 
 #if USE_DS18B20
 #include <DallasTemperature.h>
