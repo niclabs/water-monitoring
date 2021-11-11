@@ -1,0 +1,5 @@
+- [Grupo Sensores](1-sensores/README.md)
+  - [Homologación](1-sensores/homologacion.md)
+  - [Electrónica](1-sensores/electronica.md)
+- [Grupo Comunicaciones](2-comunicaciones/README.md)
+- [Grupo Sistema Experto](3-experto/README.md)
