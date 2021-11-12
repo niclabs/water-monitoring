@@ -2,6 +2,8 @@
 
 ## Introducción
 
+Finalizados los experimentos de 
+
 ## Costo
 
-# Etc
+## Etc
