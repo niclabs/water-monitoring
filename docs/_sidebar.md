@@ -1,6 +1,6 @@
 - [Grupo Sensores](1-sensores/README.md)
   - [Homologación](1-sensores/homologacion.md)
   - [Electrónica](1-sensores/electronica.md)
-  - [1.5 Hito Drifting](1-sensores/1.5 Hito Drifting.md)
+  - [1.5 Hito Drifting](1-sensores/1.5%20Hito%20Drifting.md)
 - [Grupo Comunicaciones](2-comunicaciones/README.md)
 - [Grupo Sistema Experto](3-experto/README.md)
