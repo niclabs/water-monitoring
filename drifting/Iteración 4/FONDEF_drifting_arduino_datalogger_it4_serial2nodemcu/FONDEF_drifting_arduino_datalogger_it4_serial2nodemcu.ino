@@ -10,6 +10,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 
+
 #define VERBOSE_PRINT false
 float volts0, volts1, volts2, volts3;
 float t_atm, p_atm, h_atm;
