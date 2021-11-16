@@ -23,11 +23,6 @@ const char* password = "cs6bhYnspgdp";
 const char* serverName = "http://agua.niclabs.cl/data/http";
 const char* queryApiKey = "919c5e5e086a492398141c1ebd95b711";
 
-int unixTime = 1636749718;
-
-unsigned long lastTime = 0;
-unsigned long timerDelay = 5000;
-
 void setup() {
   Serial.begin(9600);
 
@@ -46,11 +41,10 @@ void setup() {
 }
 
 void loop() {
-  //if ((millis() - lastTime) > timerDelay) {
   if (Serial.available() > 0) {
     //Check WiFi connection status
     Serial.print("Serial stream received.. ");
-    if(WiFi.status()== WL_CONNECTED){
+    if(WiFi.status()== WL_CONNECTED) {
       Serial.print("Wifi connected.. ");
       WiFiClient client;
       HTTPClient http;
