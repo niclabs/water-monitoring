@@ -64,6 +64,8 @@ void loop() {
       //                          String("}");
 
       String httpRequestData = Serial.readStringUntil('\n');
+      //http.addHeader("content-length", String(httpRequestData.length()));
+      //http.addHeader("host", "agua.niclabs.cl");
       Serial.println(httpRequestData);
       Serial.println("");
       int httpResponseCode = http.POST(httpRequestData);
@@ -77,9 +79,7 @@ void loop() {
     else {
       Serial.println("WiFi Disconnected");
     }
-    lastTime = millis();
-    unixTime += 5;
-
+    
     Serial.print("Waiting for payload.. ");
   }
 }
