@@ -1,3 +1,17 @@
+// TABLA DE SENSORES ------------------------------------------------------
+// id   nombre  piso  techo   unidad  unidad_ rango   param   error   tipo error
+// 201  pH Pro  0   14  pH  pH  pH  0.1   +-
+// 202  pH Blanco   0   14  pH  pH  pH  0.1   +-
+// 203  pH Rojo   0   14  pH  pH  pH  0.1   +-
+// 204  TDS Blanco  0   2000  uS/cm   uS/cm   CE  10  %
+// 205  TDS Rojo  0   2000  uS/cm   uS/cm   CE  10  %
+// 206  Presión agua  0   1200000   Pascal  Pascal  P   3   %
+// 207  Temperatura atm   -40   85  ºC  ºC  T   1   +-
+// 208  Presión atm   30000   110000  Pascal  Pascal  P   100   +-
+// 209  Humedad atm   0   100   %   %   H   3   %
+// 210  Temperatura agua 1  -10   85  ºC  ºC  T   0.5   +-
+// 211  Temperatura agua 2  -10   85  ºC  ºC  T   0.5   +-
+
 #include <Wire.h>
 #include <Arduino.h>
 #include "SdFat.h" // Bill Greiman
@@ -9,11 +23,19 @@
 #include "SdFat.h"
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
+#include <DS18B20.h>
 
 
 #define VERBOSE_PRINT false
 float volts0, volts1, volts2, volts3;
 float t_atm, p_atm, h_atm;
+float temp1, temp2;
+
+bool bme_connected = true;
+
+// ---------------------- DS18B20 ----------------------
+DS18B20 ds(4);
+
 
 // ---------------------- BME280 -----------------------
 Adafruit_BME280 bme; // I2C
@@ -52,49 +74,6 @@ void writeHeader() {
   file.println();
 }
 
-void logData() {
-
-  DateTime now = rtc.now();
-  
-  file.print(now.unixtime(), DEC);
-  
-  file.print(',');
-  file.print(now.year(), DEC);    file.print('/');
-  file.print(now.month(), DEC);   file.print('/');
-  file.print(now.day(), DEC);     file.print(" ");
-  file.print(now.hour(), DEC);    file.print(':');
-  file.print(now.minute(), DEC);  file.print(':');
-  file.print(now.second(), DEC);
-
-  // Write sensor data to CSV record.
-  file.write(',');file.print(volts0);
-  file.write(',');file.print(volts1);
-  file.write(',');file.print(volts2);
-  file.write(',');file.print(volts3);
-  file.write(',');file.print(volts3);
-  file.write(',');file.print(volts3);
-  file.write(',');file.print(volts3);
-
-  file.println();
-}
-
-void printData() {
-  DateTime now = rtc.now();
-  int unixTime = now.unixtime();
-
-  String httpRequestData =  String("{") +
-                                  "\"app_id\": \"app123\"," +
-                                  "\"dev_id\": \"rasp01\"," +
-                                  "\"payload_raw\": \"[" +
-                                      "{'i': 201, 'v':" + String(volts1) + ", 't': " + String(unixTime) + "000000000}," +
-                                      "{'i': 202, 'v':" + String(volts2) + ", 't': " + String(unixTime) + "000000000}," +
-                                      "{'i': 203, 'v':" + String(volts3) + ", 't': " + String(unixTime) + "000000000}" +
-                                    "]\"" +
-                                String("}");
-  Serial.println(httpRequestData);
-  delay(50);
-}
-
 void waking_up() {
   // Trigered with rtc wake up.
 }
@@ -112,6 +91,8 @@ void sleep() {
   sleep_cpu();
 }
 
+// ---------------------- SET-UP --------------------------------------------
+// --------------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);
   
@@ -143,7 +124,8 @@ void setup() {
   status = bme.begin(0x76);
   if (!status) {
       Serial.println("Could not find a valid BME280 sensor, check wiring, address, sensor ID!");
-      while (1) delay(10);
+      //while (1) delay(10);
+      bme_connected = false;
   }
 
   // -------------------- SD CARD ---------------------
@@ -196,13 +178,25 @@ void loop() {
   //volts2 = ads.computeVolts(ads.readADC_SingleEnded(2));
   //volts3 = ads.computeVolts(ads.readADC_SingleEnded(3));
 
+  temp1 = -1.0f;
+  temp2 = -1.0f;
+  t_atm = -1.0f;
+  p_atm = -1.0f;
+  h_atm = -1.0f;
+
   volts0 = ads.readADC_SingleEnded(0);
   volts1 = ads.readADC_SingleEnded(1);
   volts2 = ads.readADC_SingleEnded(2);
   volts3 = ads.readADC_SingleEnded(3);
-  t_atm = bme.readTemperature();
-  p_atm = bme.readPressure() / 100.0F;
-  h_atm = bme.readHumidity();
+  if (bme_connected) {
+    t_atm = bme.readTemperature();
+    p_atm = bme.readPressure() / 100.0F;
+    h_atm = bme.readHumidity();
+  }
+
+  if (ds.selectNext()) temp1 = ds.getTempC();
+  if (ds.selectNext()) temp2 = ds.getTempC();
+  while (ds.selectNext()) {}
 
   DateTime now = rtc.now();
   file.print(now.unixtime(), DEC);
