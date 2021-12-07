@@ -71,6 +71,8 @@ void writeHeader() {
   file.print(F(",T atm"));
   file.print(F(",P atm"));
   file.print(F(",H atm"));
+  file.print(F(",Temp1"));
+  file.print(F(",Temp2"));
   file.println();
 }
 
@@ -214,6 +216,8 @@ void loop() {
   file.write(',');file.print(t_atm);
   file.write(',');file.print(p_atm);
   file.write(',');file.print(h_atm);
+  file.write(',');file.print(temp1);
+  file.write(',');file.print(temp2);
   file.println();
   
   long unixTime = now.unixtime();
@@ -228,6 +232,8 @@ void loop() {
   Serial.print("{'i': 207, 'v':" + String(t_atm) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
   Serial.print("{'i': 208, 'v':" + String(p_atm) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
   Serial.print("{'i': 209, 'v':" + String(h_atm) + ", 't': "); Serial.print(unixTime); Serial.print("000000000}");
+  Serial.print("{'i': 210, 'v':" + String(temp1) + ", 't': "); Serial.print(unixTime); Serial.print("000000000}");
+  Serial.print("{'i': 211, 'v':" + String(temp2) + ", 't': "); Serial.print(unixTime); Serial.print("000000000}");
   Serial.print("]\"");
   Serial.print("}");
   Serial.print("\n");
