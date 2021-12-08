@@ -12,6 +12,8 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
+#include <UniversalTelegramBot.h>
+#include <ArduinoJson.h>
 
 //-----------------------------------------------------------
 //------------------- CONFIGURAR WIFI -----------------------
@@ -23,8 +25,19 @@ const char* password = "cs6bhYnspgdp";
 const char* serverName = "http://agua.niclabs.cl/data/http";
 const char* queryApiKey = "919c5e5e086a492398141c1ebd95b711";
 
+#define BOTtoken "5074346673:AAFT4Mes1o7CWBPV5dIZOQk-wgJaczJBXk4"  // your Bot Token (Get from Botfather)
+#define CHAT_ID "86430579"
+
+X509List cert(TELEGRAM_CERTIFICATE_ROOT);
+WiFiClientSecure client;
+UniversalTelegramBot bot(BOTtoken, client);
+
+int message_count = 0;
+
 void setup() {
   Serial.begin(9600);
+  configTime(0, 0, "pool.ntp.org");   // get UTC time via NTP
+  client.setTrustAnchors(&cert);      // Add root certificate for api.telegram.org
 
   WiFi.begin(ssid, password);
   Serial.println("Connecting");
@@ -35,6 +48,8 @@ void setup() {
   Serial.println("");
   Serial.print("Connected to WiFi network with IP Address: ");
   Serial.println(WiFi.localIP());
+
+  bot.sendMessage(CHAT_ID, "Bot started up", "");
  
   //Serial.println("Timer set to 5 seconds (timerDelay variable), it will take 5 seconds before publishing the first reading.");
   Serial.print("Waiting for payload.. ");
@@ -44,6 +59,8 @@ void loop() {
   if (Serial.available() > 0) {
     //Check WiFi connection status
     Serial.print("Serial stream received.. ");
+
+    message_count += 1;
     if(WiFi.status()== WL_CONNECTED) {
       Serial.print("Wifi connected.. ");
       WiFiClient client;
@@ -75,6 +92,10 @@ void loop() {
         
       // Free resources
       http.end();
+
+      if (message_count >= 30) {
+        bot.sendMessage(CHAT_ID, httpRequestData, "");
+      }
     }
     else {
       Serial.println("WiFi Disconnected");
