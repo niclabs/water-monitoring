@@ -17,8 +17,13 @@
 
 //-----------------------------------------------------------
 //------------------- CONFIGURAR WIFI -----------------------
-const char* ssid = "VTR-2968799 2.4G";
-const char* password = "cs6bhYnspgdp";
+/************ Casa Mati Macaya ************/
+//const char* ssid = "VTR-2968799 2.4G";
+//const char* password = "cs6bhYnspgdp";
+
+/********* Casa Papás Pablos Martín *******/
+const char* ssid = "GATY";
+const char* password = "internet57";
 //-----------------------------------------------------------
 //-----------------------------------------------------------
 
@@ -26,7 +31,8 @@ const char* serverName = "http://agua.niclabs.cl/data/http";
 const char* queryApiKey = "919c5e5e086a492398141c1ebd95b711";
 
 #define BOTtoken "5074346673:AAFT4Mes1o7CWBPV5dIZOQk-wgJaczJBXk4"  // your Bot Token (Get from Botfather)
-#define CHAT_ID "86430579"
+//#define CHAT_ID "86430579" // Matías
+#define CHAT_ID "-1001712597022" // Canal
 
 X509List cert(TELEGRAM_CERTIFICATE_ROOT);
 WiFiClientSecure client;
@@ -58,47 +64,53 @@ void setup() {
 void loop() {
   if (Serial.available() > 0) {
     //Check WiFi connection status
+
+    String httpRequestData = Serial.readStringUntil('\n');
     Serial.print("Serial stream received.. ");
+    Serial.print(message_count);
+    Serial.print(" .. ");
+    Serial.println(httpRequestData);
 
     message_count += 1;
-    if(WiFi.status()== WL_CONNECTED) {
-      Serial.print("Wifi connected.. ");
-      WiFiClient client;
-      HTTPClient http;
-      
-      // Your Domain name with URL path or IP address with path
-      http.begin(client, serverName);
-      http.addHeader("Content-Type", "application/json");
-      http.addHeader("query-api-key", queryApiKey);
-      //String httpRequestData =  String("{") +
-      //                            "\"app_id\": \"app123\"," +
-      //                            "\"dev_id\": \"rasp01\"," +
-      //                            "\"payload_raw\": \"[" +
-      //                                "{'i': 201, 'v':202.0, 't': " + String(unixTime) + "000000000}," +
-      //                                "{'i': 202, 'v':74.0, 't': " + String(unixTime) + "000000000}," +
-      //                                "{'i': 203, 'v':-1.0,  't': " + String(unixTime) + "000000000}" +
-      //                              "]\"" +
-      //                          String("}");
-
-      String httpRequestData = Serial.readStringUntil('\n');
-      //http.addHeader("content-length", String(httpRequestData.length()));
-      //http.addHeader("host", "agua.niclabs.cl");
-      Serial.println(httpRequestData);
-      Serial.println("");
-      int httpResponseCode = http.POST(httpRequestData);
-     
-      Serial.print("HTTP Response code: ");
-      Serial.println(httpResponseCode);
+    if (message_count >= 20) {
+      if(WiFi.status()== WL_CONNECTED) {
+        Serial.print("Wifi connected.. ");
+        WiFiClient client;
+        HTTPClient http;
         
-      // Free resources
-      http.end();
-
-      if (message_count >= 30) {
+        // Your Domain name with URL path or IP address with path
+        http.begin(client, serverName);
+        http.addHeader("Content-Type", "application/json");
+        http.addHeader("query-api-key", queryApiKey);
+        //String httpRequestData =  String("{") +
+        //                            "\"app_id\": \"app123\"," +
+        //                            "\"dev_id\": \"rasp01\"," +
+        //                            "\"payload_raw\": \"[" +
+        //                                "{'i': 201, 'v':202.0, 't': " + String(unixTime) + "000000000}," +
+        //                                "{'i': 202, 'v':74.0, 't': " + String(unixTime) + "000000000}," +
+        //                                "{'i': 203, 'v':-1.0,  't': " + String(unixTime) + "000000000}" +
+        //                              "]\"" +
+        //                          String("}");
+  
+        
+        //http.addHeader("content-length", String(httpRequestData.length()));
+        //http.addHeader("host", "agua.niclabs.cl");
+        Serial.println(httpRequestData);
+        Serial.println("");
+        int httpResponseCode = http.POST(httpRequestData);
+       
+        Serial.print("HTTP Response code: ");
+        Serial.println(httpResponseCode);
+          
+        // Free resources
+        http.end();
+  
         bot.sendMessage(CHAT_ID, httpRequestData, "");
+        message_count = 0;
       }
-    }
-    else {
-      Serial.println("WiFi Disconnected");
+      else {
+        Serial.println("WiFi Disconnected");
+      }
     }
     
     Serial.print("Waiting for payload.. ");
