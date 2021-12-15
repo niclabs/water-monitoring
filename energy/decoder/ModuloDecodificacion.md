@@ -94,15 +94,16 @@ Luego de la decodificación, se entrega una lista con lecturas. El número de le
 ## Tabla de sensores
 
 | Sensor                                           | Variable a medir     | Sensor ID | Rango          | Error  | Resolución                |
-|--------------------------------------------------|----------------------|-----------|----------------|--------|---------------------------|
-| DS18B20                                          | Temperatura          | 0000      |-10 - 85 °C     | ±0.5°C | 9 bit: 0.5 °C, 10 bit: 0.25°C, 12 bit: 0.0625 °C |
-| SHT20 I2C                                        | Temperatura          | 0001      |-40 - 125 °C    | 0.3%   | 14 bit: 0.01 °C           |
-| Gravity: Analog Water Pressure Sensor            | Presión              | 0010      | 0 - 1.6 MPa    | 0.7%   | |
-| Pressure Sensor HK1100C                          | Presión              | 0011      | 0 - 1.2 MPa    | 1.5%   | |
-| Gravity: Analog pH Sensor/Meter Kit V2           | PH                   | 0100      | 0 - 14         | ±0.1   | |
-| Gravity: Analog Electrical Conductivity Meter    | Electroconductividad | 0101      | 10 - 100 mS/cm | ±5%    | |
-| Gravity: Analog TDS Sensor/Meter for Arduino     | Electroconductividad | 0110      | 0 - 1000 ppm   | ±10%   | |
-| Grove: Turbidity Sensor (Meter) for Arduino V1.0 | Turbidez             | 0111      |                |        | |
+|--------------------------------------------------|----------------------|-----------|----------------|---------|---------------------------|
+| DS18B20                                          | Temperatura          | 0000      |-10 - 85 °C     | ±0.5°C  | 9 bit: 0.5 °C, 10 bit: 0.25°C, 12 bit: 0.0625 °C |
+| SHT20 I2C                                        | Temperatura          | 0001      |-40 - 125 °C    | 0.3%    | 14 bit: 0.01 °C           |
+| Gravity: Analog Water Pressure Sensor            | Presión              | 0010      | 0 - 1.6 MPa    | 0.7%    | |
+| Pressure Sensor HK1100C                          | Presión              | 0011      | 0 - 1.2 MPa    | 1.5%    | |
+| Gravity: Analog pH Sensor/Meter Kit V2           | PH                   | 0100      | 0 - 14         | ±0.1    | |
+| Gravity: Analog Electrical Conductivity Meter    | Electroconductividad | 0101      | 10 - 100 mS/cm | ±5%     | |
+| Gravity: Analog TDS Sensor/Meter for Arduino     | Electroconductividad | 0110      | 0 - 1000 ppm   | ±10%    | |
+| Grove: Turbidity Sensor (Meter) for Arduino V1.0 | Turbidez             | 0111      |                |         | |
+| BMP280 Barometric Pressure Sensor                | Presión              | 1000      | 0.3 - 1.1 MPa  | ±120 Pa | |
 
 ## Debugging
 El módulo `payloadVerboseDecoder` provee la misma funcionalidad que `payloadDecoder`, pero mostrando la información de cada paquete de datos decodificado.
