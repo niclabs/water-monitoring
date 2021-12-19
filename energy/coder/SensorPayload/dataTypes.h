@@ -7,6 +7,8 @@
 #define EC_GRAVITY 0x05
 #define TDS_GRAVITY 0x06
 #define TURB_GROVE 0x07
+#define PRES_BMP280 0x08 // Will be connected to the LoPy,
+                         // but we need to reserve the Sensor ID
 
 /* Typedef of struct to store readings */
 typedef struct sensor_reading {

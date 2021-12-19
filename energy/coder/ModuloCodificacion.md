@@ -42,6 +42,7 @@ La siguiente tabla determina los ID asociados a los distintos tipos de sensores
 | Gravity: Analog Electrical Conductivity Meter    | Electroconductividad | 0101      |
 | Gravity: Analog TDS Sensor/Meter for Arduino     | Electroconductividad | 0110      |
 | Grove: Turbidity Sensor (Meter) for Arduino V1.0 | Turbidez             | 0111      |
+| BMP280 Barometric Pressure Sensor                | Presión              | 1000      |
 
 ## Payload Base
 
