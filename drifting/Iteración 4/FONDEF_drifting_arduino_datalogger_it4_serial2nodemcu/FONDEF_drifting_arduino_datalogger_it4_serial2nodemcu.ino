@@ -64,10 +64,10 @@ SdFile file;                    // Log file.
 void writeHeader() {
   file.print(F("unixtime"));
   file.print(F(",timestamp"));
-  file.print(F(",A0 - Presión"));
-  file.print(F(",A1 - TDS1"));
-  file.print(F(",A2 - TDS2"));
-  file.print(F(",A3 - TDS3"));
+  file.print(F(",A0"));
+  file.print(F(",A1"));
+  file.print(F(",A2"));
+  file.print(F(",A3"));
   file.print(F(",T atm"));
   file.print(F(",P atm"));
   file.print(F(",H atm"));
@@ -171,7 +171,7 @@ void setup() {
   // Write data header.
   writeHeader();
 
-  delay(10000);
+  delay(1000);
 }
   
 void loop() {
@@ -213,37 +213,61 @@ void loop() {
   file.write(',');file.print(volts1);
   file.write(',');file.print(volts2);
   file.write(',');file.print(volts3);
+  file.write(',');file.print(volts3);
+  file.write(',');file.print(volts3);
   file.write(',');file.print(t_atm);
   file.write(',');file.print(p_atm);
   file.write(',');file.print(h_atm);
   file.write(',');file.print(temp1);
   file.write(',');file.print(temp2);
   file.println();
+
   
-  long unixTime = now.unixtime();
-  Serial.print("{");
-  Serial.print("\"app_id\": \"app123\",");
-  Serial.print("\"dev_id\": \"rasp01\",");
-  Serial.print("\"payload_raw\": \"[");
-  Serial.print("{'i': 206, 'v':" + String(volts0) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
-  Serial.print("{'i': 201, 'v':" + String(volts1) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
-  Serial.print("{'i': 202, 'v':" + String(volts2) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
-  Serial.print("{'i': 203, 'v':" + String(volts3) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
-  Serial.print("{'i': 207, 'v':" + String(t_atm) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
-  Serial.print("{'i': 208, 'v':" + String(p_atm) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
-  Serial.print("{'i': 209, 'v':" + String(h_atm) + ", 't': "); Serial.print(unixTime); Serial.print("000000000}");
-  Serial.print("{'i': 210, 'v':" + String(temp1) + ", 't': "); Serial.print(unixTime); Serial.print("000000000}");
-  Serial.print("{'i': 211, 'v':" + String(temp2) + ", 't': "); Serial.print(unixTime); Serial.print("000000000}");
-  Serial.print("]\"");
-  Serial.print("}");
+//  long unixTime = now.unixtime();
+//  Serial.print("{");
+//  Serial.print("\"app_id\": \"app123\",");
+//  Serial.print("\"dev_id\": \"rasp01\",");
+//  Serial.print("\"payload_raw\": \"[");
+//  Serial.print("{'i': 206, 'v':" + String(volts0) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
+//  Serial.print("{'i': 201, 'v':" + String(volts1) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
+//  Serial.print("{'i': 202, 'v':" + String(volts2) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
+//  Serial.print("{'i': 203, 'v':" + String(volts3) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
+//  Serial.print("{'i': 207, 'v':" + String(t_atm) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
+//  Serial.print("{'i': 208, 'v':" + String(p_atm) + ", 't': "); Serial.print(unixTime); Serial.print("000000000},");
+//  Serial.print("{'i': 209, 'v':" + String(h_atm) + ", 't': "); Serial.print(unixTime); Serial.print("000000000}");
+//  Serial.print("{'i': 210, 'v':" + String(temp1) + ", 't': "); Serial.print(unixTime); Serial.print("000000000}");
+//  Serial.print("{'i': 211, 'v':" + String(temp2) + ", 't': "); Serial.print(unixTime); Serial.print("000000000}");
+//  Serial.print("]\"");
+//  Serial.print("}");
+//  Serial.print("\n");
+//  delay(50);
+
+  Serial.print(now.year(), DEC);  Serial.print('/');
+  Serial.print(now.month(), DEC); Serial.print('/');
+  Serial.print(now.day(), DEC);   Serial.print(" ");
+  Serial.print(now.hour(), DEC);  Serial.print(':');
+  Serial.print(now.minute(), DEC);Serial.print(':');
+  Serial.print(now.second(), DEC);Serial.write(",\t");
+  Serial.print(String(volts0)+ ",\t");
+  Serial.print(String(volts1)+ ",\t");
+  Serial.print(String(volts2)+ ",\t");
+  Serial.print(String(volts3)+ ",\t");
+  Serial.print(String(volts3)+ ",\t");
+  Serial.print(String(volts3)+ ",\t");
+  Serial.print(String(t_atm) + ",\t");
+  Serial.print(String(p_atm) + ",\t");
+  Serial.print(String(h_atm) + ",\t");
+  Serial.print(String(temp1) + ",\t");
+  Serial.print(String(temp2));
   Serial.print("\n");
   delay(50);
+
   
   // Force data to SD and update the directory entry to avoid data loss.
   if (!file.sync() || file.getWriteError()) {
     error("write error");
   }
   
-  delay(10);
+  delay(50);
   sleep();
 }
