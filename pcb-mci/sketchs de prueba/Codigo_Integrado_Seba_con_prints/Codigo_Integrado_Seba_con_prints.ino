@@ -15,7 +15,6 @@
 #include <Adafruit_ADS1X15.h>
 SoftwareSerial softSerial(8,9);
 
-
 float startTime;
   // ----------------- Debug option ----------------------
 #define DEBUG 1
@@ -131,7 +130,6 @@ sensorValueFunction sensors_functions[N_SENSORS] = {
                                                    };
 
 //--------------------------------- File Functions -----------------------------------------------
-
 void createBinFile() {
     // max number of blocks to erase per erase call
     const uint32_t ERASE_SIZE = 262144L;
