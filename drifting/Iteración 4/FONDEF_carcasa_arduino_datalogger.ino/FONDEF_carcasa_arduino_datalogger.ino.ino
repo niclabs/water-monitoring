@@ -89,11 +89,67 @@ void sleep() {
   sleep_cpu();
 }
 
+void(* resetFunc) (void) = 0;
+
 // ---------------------- SET-UP --------------------------------------------
 // --------------------------------------------------------------------------
 void setup() {
+  //digitalWrite(4, HIGH);
+  //delay(200);
+  //pinMode(4, OUTPUT);
+
   Serial.begin(9600);
   
+  
+
+  // -------------------- SD CARD ---------------------
+  const uint8_t BASE_NAME_SIZE = sizeof(FILE_BASE_NAME) - 1;
+  char fileName[13] = FILE_BASE_NAME "00.csv";
+  
+  // Initialize at the highest speed supported by the board that is
+  // not over 50 MHz. Try a lower speed if SPI errors occur.
+  if (!sd.begin(chipSelect, SD_SCK_MHZ(50))) {
+    //sd.initErrorHalt();
+    Serial.println("error init sd");
+    delay(200);
+    resetFunc();
+    //digitalWrite(4, LOW);
+  }
+
+  // Find an unused file name.
+  if (BASE_NAME_SIZE > 6) {
+    error("FILE_BASE_NAME too long");
+  }
+  while (sd.exists(fileName)) {
+    if (fileName[BASE_NAME_SIZE + 1] != '9') {
+      fileName[BASE_NAME_SIZE + 1]++;
+    } else if (fileName[BASE_NAME_SIZE] != '9') {
+      fileName[BASE_NAME_SIZE + 1] = '0';
+      fileName[BASE_NAME_SIZE]++;
+    } else {
+      error("Can't create file name");
+    }
+  }
+  if (!file.open(fileName, O_WRONLY | O_CREAT | O_EXCL)) {
+    Serial.println("error file.open");
+    delay(200);
+    resetFunc();
+    //error("file.open");
+  }
+  // Read any Serial data.
+  do {
+    delay(10);
+  } while (Serial.available() && Serial.read() >= 0);
+
+  if (VERBOSE_PRINT) {
+    Serial.print(F("Logging to: "));
+    Serial.println(fileName);
+    Serial.println(F("Type any character to stop"));
+  }
+
+  // Write data header.
+  writeHeader();
+
   // ---------------------- ADC ----------------------
   ads.begin();
   ads.setGain(GAIN_ONE);
@@ -125,47 +181,6 @@ void setup() {
       //while (1) delay(10);
       bme_connected = false;
   }
-
-  // -------------------- SD CARD ---------------------
-  const uint8_t BASE_NAME_SIZE = sizeof(FILE_BASE_NAME) - 1;
-  char fileName[13] = FILE_BASE_NAME "00.csv";
-  
-  // Initialize at the highest speed supported by the board that is
-  // not over 50 MHz. Try a lower speed if SPI errors occur.
-  if (!sd.begin(chipSelect, SD_SCK_MHZ(50))) {
-    sd.initErrorHalt();
-  }
-
-  // Find an unused file name.
-  if (BASE_NAME_SIZE > 6) {
-    error("FILE_BASE_NAME too long");
-  }
-  while (sd.exists(fileName)) {
-    if (fileName[BASE_NAME_SIZE + 1] != '9') {
-      fileName[BASE_NAME_SIZE + 1]++;
-    } else if (fileName[BASE_NAME_SIZE] != '9') {
-      fileName[BASE_NAME_SIZE + 1] = '0';
-      fileName[BASE_NAME_SIZE]++;
-    } else {
-      error("Can't create file name");
-    }
-  }
-  if (!file.open(fileName, O_WRONLY | O_CREAT | O_EXCL)) {
-    error("file.open");
-  }
-  // Read any Serial data.
-  do {
-    delay(10);
-  } while (Serial.available() && Serial.read() >= 0);
-
-  if (VERBOSE_PRINT) {
-    Serial.print(F("Logging to: "));
-    Serial.println(fileName);
-    Serial.println(F("Type any character to stop"));
-  }
-
-  // Write data header.
-  writeHeader();
 
   delay(10000);
 }
