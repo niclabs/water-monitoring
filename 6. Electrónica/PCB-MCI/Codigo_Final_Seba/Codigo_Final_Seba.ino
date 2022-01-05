@@ -6,6 +6,7 @@
 #include "RTClib.h"
 #include <OneWire.h> 
 #include <DallasTemperature.h>
+#include <Adafruit_ADS1X15.h>
 
 /* Using temperature sensor is optional.
  * If USE_DS18B20 is set to 0, a dummy temperature
@@ -40,6 +41,9 @@ OneWire oneWire(ONE_WIRE_BUS);
 // Pass our oneWire reference to Dallas Temperature. 
 DallasTemperature sensors(&oneWire);
 #endif
+
+// ---------------------- ADC ----------------------
+Adafruit_ADS1015 adc;     /* Use this for the 12-bit version */
 
 // ------------------ SensorPayload --------------------
 #define N_READINGS_ENCODE 7
@@ -83,7 +87,7 @@ uint16_t written_blocks;
 // SENSING_FREQ_SECS must be less or equal to SENDING_FREQ_SECS
 #define SENSING_FREQ_SECS 3
 #define SENDING_FREQ_SECS 168
-#define N_SENSORS 1
+#define N_SENSORS 5
 // Typedef of function to read values from sensors
 typedef float (*sensorValueFunction) (void);
 
@@ -410,6 +414,13 @@ void setup() {
     sensors.begin();
     debugPrintln(F("Done"));
 #endif
+    // ---------------------- ADC ----------------------
+    Serial.println(F("Starting ADS1015..."));
+    if (!adc.begin()) {
+        Serial.println("Failed to initialize ADS.");
+        while (1);
+    }
+    Serial.println(F("Done"));
     // ---------------------- SD ----------------------
     setup_sd();
     pending_blocks = 0;
