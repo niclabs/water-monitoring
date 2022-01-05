@@ -417,12 +417,12 @@ void setup() {
     debugPrintln(F("Done"));
 #endif
     // ---------------------- ADC ----------------------
-    Serial.println(F("Starting ADS1015..."));
+    debugPrintln(F("Starting ADS1015..."));
     if (!adc.begin()) {
-        Serial.println("Failed to initialize ADS.");
+        debugPrintln("Failed to initialize ADS.");
         while (1);
     }
-    Serial.println(F("Done"));
+    debugPrintln(F("Done"));
     // ---------------------- SD ----------------------
     setup_sd();
     pending_blocks = 0;
