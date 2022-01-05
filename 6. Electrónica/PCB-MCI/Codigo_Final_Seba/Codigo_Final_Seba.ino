@@ -1,8 +1,11 @@
+// Librerías Nativas (instaladas con Arduino)
 #include <Arduino.h>
-#include "SdFat.h" // Bill Greiman
 #include <avr/sleep.h>
-#include "SensorPayload.h"
 #include <SoftwareSerial.h>
+
+// Librerías externas (respaldadas en repositorio)
+#include "SdFat.h" // Bill Greiman
+#include "SensorPayload.h"
 #include "RTClib.h"
 #include <OneWire.h> 
 #include <DallasTemperature.h>
