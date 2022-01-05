@@ -1,7 +1,7 @@
 // Librerías Nativas (instaladas con Arduino)
 #include <Arduino.h>
 #include <avr/sleep.h>
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 
 // Librerías externas (respaldadas en repositorio)
 #include "SdFat.h" // Bill Greiman
@@ -33,7 +33,7 @@
 #define ENCODE_MODE BASE_MODE
 
 // ----------------- Software Serial port --------------
-SoftwareSerial softSerial(8,9);
+//SoftwareSerial softSerial(8,9);
 
 // ---------------------- DS18B20 ----------------------
 // DS18B20 setup variables
@@ -346,7 +346,7 @@ void sendBuffer() {
     int buf_size = sp.getCurrentSize();
     while(millis() - startTime < 1000); // Busy waiting used to wait one second for LoPy4 to awake.
     debugPrintln("Timer superado");
-    int written = softSerial.write(sp.getBuffer(), buf_size);
+    int written = Serial.write(sp.getBuffer(), buf_size);
     sp.resetBuffer();
     debugPrint(F("Length of data sent: "));
     debugPrintln(written);
@@ -382,15 +382,14 @@ void wakeUpSender() {
     Send the value 0xFF to the LoPy4 to wake it up.
     **/
     debugPrintln("Sending 0xFF via serial");
-    softSerial.write(0xFF);
+    Serial.write(0xFF);
     startTime = millis();
 }
 
 //-------------------------- Main Program ------------------------------------------
 
 void setup() {
-    Serial.begin(115200);
-    softSerial.begin(19200);
+    Serial.begin(19200);
     // ---------------------- RTC ----------------------
     if (!rtc.begin()) {
         debugPrintln(F("Couldn't find RTC"));
