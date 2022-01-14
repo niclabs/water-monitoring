@@ -77,8 +77,6 @@ uint8_t pending_blocks;
 uint8_t next_to_send;
 
 //----------------------- SD configuration variables ---------------------------------
-#define USE_SD 1
-#if USE_SD
 // SD chip select pin.
 #define CHIP_SELECT 10
 // SD Error messages stored in flash.
@@ -87,12 +85,11 @@ SdFat sd;
 SdBaseFile binFile;
 block_type *sd_block;
 uint16_t written_blocks;
-#endif
 
 //------------------------ Sensors configuration variables -----------------------  
 // SENSING_FREQ_SECS must be less or equal to SENDING_FREQ_SECS
 #define SENSING_FREQ_SECS 3
-#define SENDING_FREQ_SECS 30 //168
+#define SENDING_FREQ_SECS 168
 #define N_SENSORS 5
 // Typedef of function to read values from sensors
 typedef float (*sensorValueFunction) (void);
@@ -234,7 +231,6 @@ void setup_sd() {
     /**
     Start the variables associated with the SD card.
     **/
-    /*
     // Wait for USB Serial
     if(sizeof(block_type) != 512) {
         error("block_type must have 512 bytes of length");
@@ -248,7 +244,6 @@ void setup_sd() {
     if (!sd.begin(CHIP_SELECT, SD_SCK_MHZ(16))) {
         sd.initErrorHalt();
     }
-    */
     // Use of SD buffer as data block
     sd_block = (block_type *)sd.vol()->cacheClear();
     if (sd_block == 0) {
@@ -433,7 +428,7 @@ void setup() {
     pending_blocks = 0;
     next_to_send = 0;
     // ---------------------- Binary File in SD ----------------------
-    //createBinFile();
+    createBinFile();
 }
 
 void loop() {
@@ -441,12 +436,12 @@ void loop() {
         uint8_t available_slots = DATA_DIM - sd_block->count;
         if(available_slots < N_SENSORS) { // Block is full. Can't write all sensors inside the buffer
             debugPrintln(F("Sd Block is full! Writting to file"));
-            //while(sd.card()->isBusy()); // Busy waiting
-            //if (!sd.card()->writeData((uint8_t *)sd_block)) { // Write buffer to SD
-            //    error("write data failed");
-            //}
+            while(sd.card()->isBusy()); // Busy waiting
+            if (!sd.card()->writeData((uint8_t *)sd_block)) { // Write buffer to SD
+                error("write data failed");
+            }
             debugPrintln("Data written to file");
-            if(false) {//++written_blocks == FILE_BLOCK_COUNT) { // If file is full, open another file
+            if(++written_blocks == FILE_BLOCK_COUNT) { // If file is full, open another file
                 debugPrintln(F("Current file is full! Generating another file"));
                 if (!sd.card()->writeStop()) {
                     error("writeStop failed");
@@ -463,7 +458,7 @@ void loop() {
                 next_to_send = 0;
             }
             else {
-                if(true) {//next_to_send == sd_block->count) { // All data in buffer was sent
+                if(next_to_send == sd_block->count) { // All data in buffer was sent
                     next_to_send = 0;
                 }
                 else if(first_pending_file[0] == '#') { // There is no pending file
