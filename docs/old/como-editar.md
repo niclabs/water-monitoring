@@ -1,6 +1,5 @@
 # Cómo editar bitácora
 
-## General
 Esta documentación está almacenada en el directorio `/docs` del repositorio [github.com/niclabs/water-monitoring](https://github.com/niclabs/water-monitoring) y utiliza [docsify](https://docsify.js.org/#/?id=docsify) para generar la versión web. Cualquier cambio de los archivos del repositorio actualizarán automáticamente este sitio.
 
 ### Resumen de docsify
