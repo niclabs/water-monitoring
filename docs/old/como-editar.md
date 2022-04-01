@@ -1,7 +1,6 @@
-# 💧 Documentación Proyecto Fondef ID19I10363
-*Sistema abierto experto para apoyar la gestión de recursos hídricos mediante monitoreo de bajo costo en tiempo real de aguas superficiales y subterráneas*
+# Cómo editar bitácora
 
-## Cómo editar
+## General
 Esta documentación está almacenada en el directorio `/docs` del repositorio [github.com/niclabs/water-monitoring](https://github.com/niclabs/water-monitoring) y utiliza [docsify](https://docsify.js.org/#/?id=docsify) para generar la versión web. Cualquier cambio de los archivos del repositorio actualizarán automáticamente este sitio.
 
 ### Resumen de docsify
