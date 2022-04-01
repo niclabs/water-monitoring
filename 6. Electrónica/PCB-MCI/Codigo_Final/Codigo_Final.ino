@@ -22,7 +22,7 @@
 #endif
 
 // ----------------- Debug option ----------------------
-#define DEBUG 0
+#define DEBUG 1
 #if DEBUG
 #define debugPrint(x) Serial.print(x)
 #define debugPrintln(x) Serial.println(x)
@@ -89,7 +89,7 @@ uint16_t written_blocks;
 //------------------------ Sensors configuration variables -----------------------  
 // SENSING_FREQ_SECS must be less or equal to SENDING_FREQ_SECS
 #define SENSING_FREQ_SECS 3
-#define SENDING_FREQ_SECS 56 //168
+#define SENDING_FREQ_SECS 168
 #define N_SENSORS 5
 // Typedef of function to read values from sensors
 typedef float (*sensorValueFunction) (void);
@@ -389,7 +389,7 @@ void wakeUpSender() {
 //-------------------------- Main Program ------------------------------------------
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(4800);
     // ---------------------- RTC ----------------------
     if (!rtc.begin()) {
         debugPrintln(F("Couldn't find RTC"));
