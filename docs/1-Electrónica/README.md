@@ -4,6 +4,8 @@
 Selección de componentes
 Prototipo
 Sensores
+
+
 <img title="a title" alt="Alt text" src="images/Diagrama Alimentación.png">
 
 
