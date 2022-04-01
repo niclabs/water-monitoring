@@ -1,4 +1,4 @@
-# Comunicación Inalámbrica
+# 📡 Comunicación Inalámbrica
 
 ## Diseño
 

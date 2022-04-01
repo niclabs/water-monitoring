@@ -1,4 +1,4 @@
-# Electrónica
+# 💻 Electrónica
 
 ## Diseño
 Selección de componentes
