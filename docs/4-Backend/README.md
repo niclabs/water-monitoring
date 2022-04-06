@@ -1,9 +1,13 @@
 # 🚀 Backend
 
-Arquitectura
+## Arquitectura
 
-Tecnologías
+## Tecnologías
 
-Fotos del sistema
+## Base de datos
 
-Diseño general, parámetros de diseño, participantes del proceso de diseño
+## Proceso de diseño general, parámetros de diseño, participantes del proceso de diseño
+
+## Fotos del sistema
+
+
