@@ -1,6 +1,7 @@
 - [💧 Homepage](/)
-- [🌡 Sensores](0-Sensores/README.md)
-- [💻 Electrónica](1-Electrónica/README.md)
-- [📦 Carcasa](2-Carcasa/README.md)
-- [📡 Comunicación Inalámbrica](3-Comunicación%20inalámbrica/README.md)
-- [🚀 Backend](4-Backend/README.md)
+- [🌡 Sensores](0-Sensores.md)
+- [💻 Electrónica](1-Electrónica.md)
+- [📦 Carcasa](2-Carcasa.md)
+- [📡 Comunicación Inalámbrica](3-Comunicación-inalámbrica.md)
+- [🚀 Backend](4-Backend.md)
+
