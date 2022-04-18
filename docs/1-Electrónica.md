@@ -1,6 +1,6 @@
 # 💻 Electrónica
 
-## Diseño
+## Diseños
 Selección de componentes
 Prototipo
 Sensores
