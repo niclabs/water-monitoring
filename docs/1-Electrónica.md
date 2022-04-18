@@ -1,29 +1,132 @@
 # 💻 Electrónica
 
-## Diseños
-Selección de componentes
-Prototipo
-Sensores
+## Diseño
+El dispositivo de electronica (nodo sensor) diseñado para el monitoreo de de agua en intervalos de tiempo de manera autónoma, esta basado en tomar las medidas con sesores para ser enviadas mediante comunicación serial a un sistema de comunicación para el monitorio de estas características, este dispositivo tomará medidas de pH, Condutividad, turbidez, temperatura y presión.
 
+\*imagen sistema completo resaltando el nodo sensor*
 
-<img title="a title" alt="Alt text" src="images/Diagrama Alimentación.png">
+### Prototipo
+Como prototipo inicial se realizó un circuito en Arduino para realizar pruebas con sesores, medidas y comunicación para obtener una versión funcional que pudiera enviar los datos.
+#### Selección de componentes
+Dado lo anterior los componentes que integran este prototipo inicial son los siguientes:
 
+1. Arduino Nano: Microcontrolador principal.
+1. ADC: Lectura de señales analógicas a digitales.
+1. RTC: Encargado de establecer los tiempo de medidas mediante alarmas y estado de reposo.   
+1. Modulo SD para el guardado de los datos medidos.
+1. Sensores: Temperatura, conducitividad, pH, Presión y Turbidez. 
+1. RS485: Para realizar una comunicación serial de gran alcance(>10m).
 
-## Historial de Versiones
-bugs
-mejoras
-mejoras no realizadas
+Destacar que estos sensores seleccionados se sometieron a una serie de pruebas para comprobar su rendimiento, ver sus limitaciones y desgaste en el tiempo.
+
+Como resultados iniciales se tiene un nodo sensor capaz de obtener medidas de los sensores, guardar estos datos en una microSD y ademas enviar estos datos de manera serial y un prototipo inicial lo suficientemente útil para la realización de pruebas en profundidad y analizar las limitaciones de los sensores.
+### PCB
+Continuando con las mejoras del del nodo sensor, y el prototipo funcionando de manera adecuada, en conjunto con "MCI electronic" (Frabicante local de PCB y diseño de circuitos), se llevo a cabo la integración completa del prototipo a una PCB con mejoras incluidas dadas principalmente en el sistema de energía:
+
+1. Agregar al nodo un circuito de energía que sea alimentado a travéz de baterías de litio 18650 con toda su electrónica para un correcto funcionamiento (Cagardores y elevadores).
+1. Dividir la fuente de energía en una activa (5V) que siempre entrega alimentación al sistema y una de reposo (5Vs) que se apaga cuando el sistema no esta midiendo o enviado datos para aquellos componentes que puedan ser apagados para reducir el consumo lo mayor posible.
+
+<img title="a title" alt="Alt text" src="images/diagrama_alimentacion.png">
+
+La PCB incluye toda la electrónica de sensores y las necesarias  como reguladores de voltaje (-5V,3V,-3V y 3.3V) siendo una pieza completa que se insertan los sensores para tomar las medidas. Posee ademas una conexion FTDI para realizar la programación del microcontrolador.
 
 <img title="a title" alt="Alt text" src="images/PCBnombrada_v0.png">
 
-## Fabricación
-cotización
-fabricación
-armado
 
-## Programación
-versiones
-codificación
+#### Historial de Versiones
+
+Debido a diversos tipo de situaciones como falta de pistas o distribuciones de los componentes en diferentes fuentes de energía (5V y 5Vs) o simple optimización de esta, se obtuvieron varias versiones de PCB a modo de mejora.
+
+1. **Versión N°1:** La primera placa PCB entrega por "MSI electronic" Con cables en la parte frontal entr el RTC y el microcontrolador.
+
+<img title="a title" alt="Alt text" src="images/diagrama_version1.png">
+
+Detalles:
+
+* Esta versión de la placa posee el pin de medida de la alimentación 5Vs antes la electrónica del "switch" que permite apagarla en reposo.
+* Por otro lado la alimentacion 5Vs alimenta el componente de comunicación Rs485 y al regulador de -5V realizando modificaciónes en las fuentes de energía.
+
+**Modificación 1:** Debido a que simplemente la alimentación apagaba el RS485 y un regulador, se realizaron cambios para dejar d en la alimentación de reposo(5Vs) a los sensores y los reguladores faltantantes que seran utilizados solamente en medida y envío de datos. Para ello se cortó una pista separando los reguladores y sensores con la alimentacion continua (5V) y se agregó un cable para alimentarlos con 5Vs.
+
+<img title="a title" alt="Alt text" src="images/diagrama_modificacion1.png">
+
+Como resultados trajo mejoras en el consumo.
+
+**Modificación 2**: Se procedió a cambiar el componente de la comunicación 485 por uno estándar (Max485) ya que el que se tiene considerado esta versión es muy antiguo y posee un
+consumo elevado aun cuando no se está transmitiendo para reducir más el consumo de este.
+
+Tras relizar el cambio a mano se presentaron problemas en las conexiones entre compoentes dejando de utilizar esta versión.
+
+
+2. **Versión N°2:** Segunda placa PCB entregada por MSI, que posee un cable en la parte posterior por la falta de una ruta.
+
+Detalles:
+
+*  La configuracion entre la alimentacion y los componentes es ligeramente diferente a la primera versión con su primera modificación debido a que posee el componete de comunicación 485 a la alimentación constante 5V.
+* Esta placa fue devuelta para la corrección de la ruta faltante.
+* Los Archivos que se tienen de PCB son las de esta versión con la ruta faltante.
+
+<img title="a title" alt="Alt text" src="images/diagrama_version2.png">
+
+3. **Versión N°3**: Esta versión es la placa anterior con la ruta corregida.
+
+### mejoras no realizadas
+
+Como mejoras no realizadas se tiene el cambio del componente de comunicación 485 de alto consumo debido a que es antiguo, aun más en esta versión ya que esta conectado en la alimentación constante por lo que este consume con el sistema en reposo.
+## Fabricación
+
+Con los archivos de una versión funcional del sistema (Versión N°2), se realizó un estudio en la fabricacion de esta placa para tener una idea y obtener un analisis en terminos de los costos que tiene finalmente el "nodo sensor". 
+
+
+### Cotización:
+Para cotizar se considero la posibilidad de una fabricación y ensablaje completamente externo con los componetes entregados por el fabricante.
+
+1. Fabricación y ensamblaje externo:
+Consireaciones:
+ * Para esta cotización se tomaron en cuenta los fabricantes: JLCPCB, PCBway, PCBgogo, EEcart, SeedStudio.
+ * Los precios obtenidos son dados en base a cotizaciones rapidas entregadas por los fabricantes.
+ * Los archivos requeridos para las cotizaciones cortas son: Gerber (PCB), BOM (componentes) con un formato específico para cada fabricante y el *"pick and place"* en algunos casos.
+ * La cotización fue realizada para una cantidad de 5 PCBs ensambladas (cantidad mínima aceptada).
+
+Se descartó JLCPCB ya que su servicio de ensamblado es muy limitado.
+
+Costos: Tabla de precios en USD.
+
+|     Fabricante    |     Cant    |     Placa     |     Componentes    |     Costo Assembly.    |     Envío      |     Total       |
+|-------------------|-------------|---------------|--------------------|------------------------|----------------|-----------------|
+|     EECART        |     5       |     $8.93     |     $702.957       |     $ 145.37           |     $50.00*    |     $907.26     |
+|     PCBWAY        |     5       |     $87.66    |     $679.41        |     $88.00             |     $49.69     |     $904.76     |
+|     PCBGOGO       |     5       |     $24.00    |     $1237.00       |     $160.00            |     $93.00     |     $1493.00    |
+|     SEEDSTUDIO    |     5       |     $52.69    |     -              |     $281.52            |     $0         |     $912.93     |
+
+
+Tiempo: Tiempo total de fabricación luego de la confirmación del fabricante.
+
+|     Fabricante    |     Fabricación   |     Ensamblado    |        Envío      |     Total de tiempo   |
+|:-----------------:|:-----------------:|:-----------------:|:-----------------:|:---------------------:|
+|       EECART      |       4 Días      |        29 Días    |     2-3Días       |       5 Semanas       |
+|       PCBWAY      |      3-4 Días     |      28 Días      | 4-7Días Hábiles   |      5.5 Semanas      |
+|       PCBGOGO     |       1 Día       |         -         |  5-7Días Hábiles  |       4 Semanas       |
+|     SEEDSTUDIO    |         -         |      29 Días      |  5-7Días Hábiles  |       5 Semanas       |
+
+Dado los tiempos de fabricación, tiempos de respuesta y precios dados PCBway se considera una de las mejores opciones, además, siendo el único que entrega un detalle completo de los precios de cada uno de los componentes. Otro fabricante a considerar es EEcart.
+
+### Programación
+HAblando del software del dispositivo nodo sensor se poseen 2 versiones  con y sin SD para su funcionamiento, estos posee las siguentes caracteristicas:
+1. Posee variables de los períodos de medida y envvío de datos:Es una de las características mas importantes para la definición de tiempos de funcinamniento del sistema. La variabble Freq_sens indica cada cuantos segundos tomada una medida de los sensores y la variable freq_send representa el intervalo en segundos en el que son enviados los datos, claramente Freq_send> freq_sens ya que deben existir datos medidos para ser enviados.
+2. Guarda los datos en un buffer (arreglo): Los datos medidos, es decir, sensor, mediida y tiempo de medida en cada sensor son codificados (explicado más adelante) en bytes, y guardados en un buffer(arreglo) de 512 bytes en la SD o  utilizando la memoria del microcontrolador dependiendo de versión. Para el caso de la sd cuando el arrreglo esta lleno guarda los datos en archivos binarios dentro de la tarjeta SD y los envia junto a los valores del arrglo cuando sea el tiempo de enviado. Si es la versión sin sd no se posee más memoria que la del arreglo por lo que esta limitado a medir una cantidad maxima de datos antes de enviar, por lo que la freq_send tiene esta limitante.
+3. Los datos guardados son coidificados: Para realizar un envío más eficiente ya sea por velocidad o disminución de consumo energético en el momento de enviar datos se desarrolló una librería para ello. Lo importtante a destacar más que la programación de este es la forma de codificación que existe que puede ser de 3 maneras:
+* Codificiación base:
+* COdificacion diferencial:
+* COdificacion aaa
+4. Los datos son envidos mediante transmisión serial RS485  como paquetes de bytes: como los datos son codificacods a bytes estos son enviados de esta manera en paquetes de bytes, la comunicación RS485 es simplemente para tener mayor alcance como se dijo anteriormente.
+
+
+Código completo:
+El primero es el codigo completo que utiliza la sd para el guardado de los datos, el codigo esta centro
+
+Ejemplos del funcionamiento de medidas:
+
 
 
 ## Roadmap
