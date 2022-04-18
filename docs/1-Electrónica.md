@@ -112,14 +112,21 @@ Tiempo: Tiempo total de fabricación luego de la confirmación del fabricante.
 Dado los tiempos de fabricación, tiempos de respuesta y precios dados PCBway se considera una de las mejores opciones, además, siendo el único que entrega un detalle completo de los precios de cada uno de los componentes. Otro fabricante a considerar es EEcart.
 
 ### Programación
-HAblando del software del dispositivo nodo sensor se poseen 2 versiones  con y sin SD para su funcionamiento, estos posee las siguentes caracteristicas:
-1. Posee variables de los períodos de medida y envvío de datos:Es una de las características mas importantes para la definición de tiempos de funcinamniento del sistema. La variabble Freq_sens indica cada cuantos segundos tomada una medida de los sensores y la variable freq_send representa el intervalo en segundos en el que son enviados los datos, claramente Freq_send> freq_sens ya que deben existir datos medidos para ser enviados.
-2. Guarda los datos en un buffer (arreglo): Los datos medidos, es decir, sensor, mediida y tiempo de medida en cada sensor son codificados (explicado más adelante) en bytes, y guardados en un buffer(arreglo) de 512 bytes en la SD o  utilizando la memoria del microcontrolador dependiendo de versión. Para el caso de la sd cuando el arrreglo esta lleno guarda los datos en archivos binarios dentro de la tarjeta SD y los envia junto a los valores del arrglo cuando sea el tiempo de enviado. Si es la versión sin sd no se posee más memoria que la del arreglo por lo que esta limitado a medir una cantidad maxima de datos antes de enviar, por lo que la freq_send tiene esta limitante.
-3. Los datos guardados son coidificados: Para realizar un envío más eficiente ya sea por velocidad o disminución de consumo energético en el momento de enviar datos se desarrolló una librería para ello. Lo importtante a destacar más que la programación de este es la forma de codificación que existe que puede ser de 3 maneras:
+Hablando del software del dispositivo nodo sensor se poseen 2 versiones  con y sin SD para su funcionamiento, estos posee las siguentes caracteristicas:
+1. Posee variables de los períodos de medida y envvío de datos: Es una de las características más importantes para la definición de tiempos de funcinamniento del sistema. La variable "Freq_sens" indica cada cuantos segundos tomada una medida de los sensores y la variable "Freq_send" representa el intervalo en segundos en el que son enviados los datos, claramente  Freq_send > Freq_sens  ya que deben existir datos medidos para ser enviados.
+
+2. Los datos guardados son coidificados: Para realizar un envío más eficiente ya sea por velocidad o disminución de consumo energético en el momento de enviar datos se desarrolló una librería quye codifique los datos para ello. Lo importtante a destacar más que la programación de este es la forma de codificación que existe que puede ser de 3 maneras:
 * Codificiación base:
 * COdificacion diferencial:
-* COdificacion aaa
+* COdificacion diferencial
+
+3. Guardado de datos en un "DataBlock": Los datos de cada intervalo, es decir, el tipo (sensor ID), su valor y tiempo de medida (Timestamp) en cada sensor son codificados (explicado más adelante) en bytes al que llamaremos "sensor reading", estos son generados en cada medida y será guardado en el "Datablock" (arreglo) de 512 bytes que actuara como memoria RAM-buffer. A modo de ejemplo, los "sensor reading" para el caso de codificación base posee un largo de 9 bytes para el guardado de los datos, Dado esto la estructura del Datablock esta dada por 2 bytes para llevar el conteo de medidas, 504 bytes para "sensor reading" (56 medidas u 11 medidas de 5 sensores) y 6 bytes sobrantes como se puede ver acontinuación.
+<img title="a title" alt="Alt text" src="images\datablock.png">
+
 4. Los datos son envidos mediante transmisión serial RS485  como paquetes de bytes: como los datos son codificacods a bytes estos son enviados de esta manera en paquetes de bytes, la comunicación RS485 es simplemente para tener mayor alcance como se dijo anteriormente.
+Para el caso de la sd cuando el DataBlock esta lleno guarda los datos en archivos binarios dentro de la tarjeta SD y los envia junto a los valores del arrglo cuando sea el tiempo de enviado. Si es la versión sin sd no se posee más memoria que la del arreglo por lo que esta limitado a medir una cantidad maxima de datos antes de enviar, por lo que la "Freq_send" tiene esta limitante, por ejemplo,un máximo de 11 veces la Freq_sens para 5 sensores para no perder datos en la codificación base.
+
+
 
 
 Código completo:
