@@ -125,9 +125,9 @@ Para el caso de la sd cuando el DataBlock esta lleno guarda los datos en archivo
 <img title="a title" alt="Alt text" src="images\datablock.png">
 
 4. Codificación par envío de datos: Para reducir la cantidad de tamaño de los datos enviados y asi realizar un envío más rápido con menor consumo, se reali´zaron distitos tipos de codificación de enviado a modo de reducir el tamaño de los datos.
-* Codificiación de envío base:  Para esta codificiación y las siguientes se define un nuevo bloque "Sensing Unit", que se divide en 1byte "Header" que posee la informacion del tipo de codificación y la ID del sensor, 6 bytes "Payload" que contiene 4bytes para el Tiemstamp y solo 2bytes para el valor del sensor, esta reducción ene le valor del sensor se debe a que los valores de los sensores al ser pequeños pueden ser prefectamente representados en 2bytes.
+* Codificiación de envío base:  Para esta codificiación y las siguientes se define un nuevo bloque "Sensing Unit", que se divide en 1byte "Header" que posee la informacion del tipo de codificación y la ID del sensor y 6 bytes "Payload" que contiene 4bytes para el Tiemstamp y solo 2bytes para el valor del sensor, esta reducción ene le valor del sensor se debe a que los valores de los sensores al ser pequeños pueden ser prefectamente representados en 2bytes. Reduciendo la unidad "sensor reading" de 9bytes a la unidad "Sensong Unit Base" de 7bytes.
 
-
+<img title="a title" alt="Alt text" src="images\sensing_unit_base.png">
 
 * Codificación envío repetivvio:
 * COdificacion envío diferencial:
