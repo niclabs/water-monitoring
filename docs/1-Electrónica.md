@@ -134,8 +134,7 @@ Para el caso de la sd cuando el DataBlock esta lleno guarda los datos en archivo
 
 
 
-4. Los datos son envidos mediante transmisión serial RS485  como paquetes de bytes: como los datos son codificacods a bytes estos son enviados de esta manera en paquetes de bytes, la comunicación RS485 es simplemente para tener mayor alcance como se dijo anteriormente.
-
+4. Los datos son envidos mediante transmisión serial RS485  como paquetes de bytes: Como los datos son codificados a bytes estos son enviados de esta manera en paquetes de bytes a través de comunicación serial RS485 estos estan dados por un tamaño máximo de 51 bytes, es decir, 7 Sensing Unit (49 bytes) y 2 bytes para detección de errores. Este tamaño se define debido a que es el tamaño mínimo de un paquete en LoRa (módulo de comunicación inalámbrica utilizada en la superficie del sistema).
 
 
 
