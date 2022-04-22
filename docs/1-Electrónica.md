@@ -129,8 +129,8 @@ Para el caso de la sd cuando el DataBlock esta lleno guarda los datos en archivo
 
 <img title="a title" alt="Alt text" src="images\sensing_unit_base.png">
 
-* Codificación envío repetivvio:
-* COdificacion envío diferencial:
+* Codificación envío repetivio:
+* Codificacion envío diferencial:
 
 
 
@@ -140,12 +140,10 @@ Para el caso de la sd cuando el DataBlock esta lleno guarda los datos en archivo
 
 
 Código completo:
-El primero es el codigo completo que utiliza la sd para el guardado de los datos, el codigo esta centro
 
 Ejemplos del funcionamiento de medidas:
 
-
-
+dsdsf
 ## Roadmap
 backlog
 pasos futuros
