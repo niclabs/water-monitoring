@@ -17,7 +17,7 @@ El módulo de captura está compuesto por cuatro elementos:
 
 La figura 2 muestra una imagen de la placa electrónica y los transductores antes de ser ensamblados dentro de la carcasa sumergible. Esta placa incluye las funcionalidades de captura de datos de los transductores, envío de cada muestra hacia el módulo de comunicación. Cada muestra es estampada con la hora de captura más un indicativo del transductor que obtuvo la muestra.
 
-<img title="a title" alt="Alt text" src="images/nodo_captura.png">
+<img title="a title" alt="Alt text" src="images/nodo_captura.PNG">
 
 Figura 2. Placa Electrónica junto a los transductores
 
