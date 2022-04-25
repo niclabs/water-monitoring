@@ -3,7 +3,7 @@
 ## Introducción
 La figura 1 muestra el diagrama completo de conectividad de la solución. El sistema de comunicación a implementar utiliza un medio guiado para la comunicación entre el módulo de captura, ubicado en el fondo de la masa de agua y el módulo de comunicación, ubicado en la superficie. Se utiliza la tecnología LoRaWAN para la transmisión de datos entre el módulo de comunicación y el network server. Finalmente la comunicación entre el Network Server y el Sistema Experto es a través de tecnología Web utilizando el protocolo HTTP. Los datos de los sensores son almacenados en una Base de Datos para ser posteriormente procesados por el sistema experto.
 
-<img title="a title" alt="Alt text" src="images/diagrama_bloques_solucion.png">
+<img title="a title" alt="Alt text" src="images/diagrama_bloques_solucion.PNG">
 Figura 1. Diagrama de bloques de la solución
 
 ## Nodo Sensor
@@ -25,7 +25,7 @@ Figura 2. Placa Electrónica junto a los transductores
 El envío de datos desde el módulo de captura al módulo de comunicación es a través del protocolo serie RS485. Para ello ambos módulos cuentan con un conversor de protocolo de comunicación UART a RS485 como muestra la figura 3. El medio físico que une ambos módulos es un cable de par trenzado del tipo UTP (unshielded twisted pair). Para poder resistir el agua, el cable es recubierto con una manguera flexible (ver figura 4). En los extremos se utiliza un mecanismo para introducirlo a la carcasa sumergible.
 
 
-<img title="a title" alt="Alt text" src="images/comunicacion_serial.png">
+<img title="a title" alt="Alt text" src="images/comunicacion_serial.PNG">
 
 Figura 3. Diagrama de bloques para la comunicación entre módulos en el nodo sensor
 
@@ -33,7 +33,7 @@ Figura 3. Diagrama de bloques para la comunicación entre módulos en el nodo se
 
 
 
-<img title="a title" alt="Alt text" src="images/cable.png">
+<img title="a title" alt="Alt text" src="images/cable.PNG">
 
 Figura 4. Cable de datos UTP para la comunicación entre el módulo de captura y el módulo de comunicaciones.
 
@@ -44,7 +44,7 @@ Figura 4. Cable de datos UTP para la comunicación entre el módulo de captura y
 La figura 5 muestra la carcasa sumergible. La carcasa está compuesta por un tubo central de acrílico de 3 pulgadas de diámetro interior y espesor de 3 mm, más dos piezas de ajuste (con sus respectivas tapas) y 3 o'rings de sellado. Las piezas que reciben los orings se han realizado en un proceso de torneado de Technyl debido a su universalidad, las tapas por otro lado, se han cortado en un proceso láser cnc por su bajo coste y precisión.
 
 
-<img title="a title" alt="Alt text" src="images/carcasa.png">
+<img title="a title" alt="Alt text" src="images/carcasa.PNG">
 
 figura 5. Carcasa Sumergible. (a) imagen renderizada de la carcasa 3D completa, con el anclaje, sensores y placa electrónica. (b) Fotografía de la carcasa con anclaje y sensores.
 
@@ -61,7 +61,7 @@ El módulo de comunicación está compuesto por 2 elementos:
 
 Para poder realizar la implementación se considera el diagrama de una red LPWA (Low Power Wide Area) definida en *[1]*, el cual considera cuatro bloques: End-Nodes, Concentrado/Gateway, Network Server y Application Server tal como lo muestra la figura 6. El módulo de comunicación del nodo sensor representa a un End-Node en la arquitectura LPWA.
 
-<img title="a title" alt="Alt text" src="images/lorawan.png">
+<img title="a title" alt="Alt text" src="images/lorawan.PNG">
 
 Figura 6. Arquitectura LoRaWAN. Tomada de [1].
 
@@ -69,11 +69,11 @@ El nodo LoPy4 es una placa de desarrollo que soporta cuatro tipos de red (LoRa, 
 
 
 
-<img title="a title" alt="Alt text" src="images/nodo_comunicaciones.png">
+<img title="a title" alt="Alt text" src="images/nodo_comunicaciones.PNG">
 
 Figura 7. Módulo de Comunicaciones con todas sus partes (antes de ser ensamblado)
 
-<img title="a title" alt="Alt text" src="images/nodo_comunicaciones_2.png">
+<img title="a title" alt="Alt text" src="images/nodo_comunicaciones_2.PNG">
 
 Figura 8. Módulo de Comunicaciones con todas sus partes (después de ser ensamblado)
 
@@ -88,7 +88,7 @@ Como se indicó en la sección anterior, el módulo de comunicación del nodo se
 ## Sistema Experto
 El sistema experto representa al Application Server de una arquitectura LoRaWAN (ver figura 6). Luego que los mensajes LoRaWAN son recibidos por el Network Server, son enviados al Sistema Experto a través de mensajes HTTP. El flujo de mensajes se describe en la figura 9.
 
-<img title="a title" alt="Alt text" src="images/paquetes.png">
+<img title="a title" alt="Alt text" src="images/paquetes.PNG">
 
 Figura 9. Flujo de mensajes entre el módulo de captura y el Sistema Experto
 
