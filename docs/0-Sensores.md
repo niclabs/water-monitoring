@@ -26,20 +26,12 @@ Se seleccionaron los sensores en la siguiente tabla para medir las variables fis
 | Turbiedad                  | Grove - Turbidity Sensor/Meter   | 0 - 3000 NTU                                | No indica                          | 4,5 NTU<br>(12 bit)              |
 
 - además se toma en cuenta los voltajes de funcionamiento de los sensores y el protocolo de comunicación.
-<!--
-## Pruebas sensores
--->
+
 
 Por lo general se sometió a los sensores a tipos de pruebas que permitieran evaluar dos dimensiones principales de su comportamiento: (1) su presición y (2) su desempeño por periodos prolongados de sumersión en medio acuático ('sensor drift'). 
 
 ## Temperatura
 
-
-<!--
-| <img title="a title" alt="Alt text" src="images/sensor_temp.png" width="300px"> |  <img title="a title" alt="Alt text" src="images/sensor_temp_experimento1.png" width="300px">  |
-|:--:|:--:|
-| *Sensor modelo DS18B20* |  *Experimento we*  |
--->
 
 <img title="a title" alt="Alt text" src="images/sensor_temp.png" width="200px">
 <img title="a title" alt="Alt text" src="images/sensor_temp_experimento1_foto.jpg" width="300px">
