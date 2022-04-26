@@ -1,10 +1,12 @@
 # Sensores 🌡 
 
+<!--
 TODO: poner modelo de sensores de referencia.
 TODO: poner cosas que salieron mal: medicion presión a 40cm, ...)
 TODO: poner fotos de todos los experimentos para todos.
 TODO: terminar de analizar íultimos datos.
 TODO: poner tabla de resuemn resultados sensores.
+-->
 
 <img title="a title" alt="Alt text" src="images/sensor_agua.png">
 
