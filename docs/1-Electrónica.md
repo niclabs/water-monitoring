@@ -23,8 +23,8 @@ Como resultados iniciales se tiene un nodo sensor capaz de obtener medidas de lo
 ### PCB
 Continuando con las mejoras del del nodo sensor, y el prototipo funcionando de manera adecuada, en conjunto con "MCI electronic" (Frabicante local de PCB y diseño de circuitos), se llevo a cabo la integración completa del prototipo a una PCB con mejoras incluidas dadas principalmente en el sistema de energía:
 
-1. Agregar al nodo un circuito de energía que sea alimentado a travéz de baterías de litio 18650 con toda su electrónica para un correcto funcionamiento (Cagardores y elevadores).
-1. Dividir la fuente de energía en una activa (5V) que siempre entrega alimentación al sistema y una de reposo (5Vs) que se apaga cuando el sistema no esta midiendo o enviado datos para aquellos componentes que puedan ser apagados para reducir el consumo lo mayor posible.
+1. **Cargador de baterías**: Agregar al nodo un circuito de energía que sea alimentado a travéz de baterías de litio 18650 con toda su electrónica para un correcto funcionamiento (Cagardores y elevadores).
+1. **On/Off para sensores** Dividir la fuente de energía en una activa (5V) que siempre entrega alimentación al sistema y una de reposo (5Vs) que se apaga cuando el sistema no esta midiendo o enviado datos para aquellos componentes que puedan ser apagados para reducir el consumo lo mayor posible.
 
 <img title="a title" alt="Alt text" src="images/diagrama_alimentacion.png">
 
