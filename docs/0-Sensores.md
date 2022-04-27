@@ -69,6 +69,7 @@ TODO: (considerar rápidez en la toma de datos, existe histéresis en la bajada 
 <img title="a title" alt="Alt text" src="images/sensor_tds.png" width="300px">
 
 TODO: (fotos del experimento)
+TODO: al medir dos sensores de conductividad se afectan la medida. Pero el de conductividad con pH o presión o temp no.
 
 - Ojo: Documentación indica rango [0,2000 uS/cm] ([link producto](https://www.dfrobot.com/product-1662.html))
 
@@ -114,6 +115,10 @@ TODO: fotos experimento
 
 - Se utilizan dos sensores para calcular la columna de agua 
 - TODO: Poner sensores dereferencia para ambos casos.
+
+<img title="a title" alt="Alt text" src="images/sensor_presion_experimento1_0.png" width="300px">
+<img title="a title" alt="Alt text" src="images/sensor_presion_experimento1_1.jpeg" width="300px">
+<img title="a title" alt="Alt text" src="images/sensor_presion_experimento1_2.jpeg" width="300px">
 
 <img title="a title" alt="Alt text" src="images/sensor_presion_experimento1.png" width="1000px">
 <img title="a title" alt="Alt text" src="images/sensor_presion_experimento1_rmse.png" width="350px">
