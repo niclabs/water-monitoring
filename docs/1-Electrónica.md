@@ -27,10 +27,14 @@ Destacar que estos sensores seleccionados se sometieron a una serie de pruebas p
 Por otra parte la conexión entre estos componentes esta dado se manera simplificada en el diagrama a continuación:
 
 <img title="a title" alt="Alt text" src="images/diagrama_bloque_simple.png">
+<img title="a title" alt="Alt text" src="images/electronica_conexiones_prototipo.png" width="400px">
 
 Donde los sensores TDS, pH y turbidez poseen su electrónica, el de presión entrega sus valores al ADC y el de temperatura mediante comunicación "OneWire" directamente al microcontrolador. El módulo SD se comunica con el microcontrolador a travez de conexion "ISCP", en cambio el ADC posee una conexión I2C para tener las señales de los 4 sensores y por último la imformación de los sensores es enviada de manera serial al componente 485 y es enviada mediante los canales A y B. 
 
 Como resultados iniciales se tiene un nodo sensor capaz de obtener medidas, guardar estos datos en una microSD y además enviar estos datos de manera serial siendo un prototipo inicial lo suficientemente útil para la realización de pruebas en profundidad y analizar las limitaciones de los sensores bajo condiciones en profundidad controlada.
+
+<img title="a title" alt="Alt text" src="images/electronica_prototipo_armado.png" width="500px">
+
 ### PCB
 Continuando con las mejoras del del nodo sensor, y el prototipo funcionando de manera adecuada, si bien es un dispositivo apto para la realización de pruebas controladas, se busca un dispositivo más apto en terrenos reales, como profundidasdes de aguas de al menos 30 metros. Para ello se relizó una integración den PCB con un frabicante local de PCB y diseño de circuitos, pasando prototipo a una PCB con mejoras incluidas dadas principalmente en el sistema de energía y espacio:
 
@@ -50,24 +54,20 @@ La PCB incluye toda la electrónica de sensores y las necesarias  como regulador
 
 Debido a diversos tipo de situaciones como falta de pistas o distribuciones de los componentes en diferentes fuentes de energía (5V y 5Vs) o simple optimización de esta, se obtuvieron diferentes versiones de PCB como modificaciones diferenciadas principalmente en la distribución energética a modo mejora,  estas versiones y modificaciones estan resumidas en la siguiente tabla.
 
-|       PCB         |                  **Detalle**                 |                    **Características**                   |                         **Resultado**                        |                              **Problemas**                             |
+|       PCB         |                  **Modificación**                 |                    **Características**                   |                         **Resultado**                        |                              **Problemas**                             |
 |----------------|:--------------------------------------------|:--------------------------------------------------------|:------------------------------------------------------------|:----------------------------------------------------------------------|
-|  **Version 1** |                                              |                                                          |                                                              |                                                                        |
-|    original    | Primera PCB fabricada                        | Distribución de alimentación en reposo y continua.       | Placa completamente funcional                                | La alimentación de resposo solo esta conectada con el compoente RS485. |
-| Modificacion 1 | Corte y cambio de pistas para la PCB inicial | Distribucion energética de compoenetes mas eficiente.    | Reducción del consumo en estado activo.                      | Componete RS485 de alto consumo en rposo                               |
-| Modificacion 2 | Cambio de compoente RS485 manualmente        | Optimización de consumo en rposo                         | Problema funcional de la placa, (mala practica de soldadura) | PCB sin funcionamiento.                                                |
-|  **Version 2** |                                              |                                                          |                                                              |                                                                        |
-|    Original    | PCB con enrrutado nuevo                      | Compoentes divididos en su mayoria correctamente         | Placa completamente funcional                                | RS485 de alto consumo y en alimentación continua, falta de una pista.  |
-|  **Version 3** |                                              |                                                          |                                                              |                                                                        |
-|    Original    | PCB con enrrutado nuevo                      | Correccion de la pista faltante de la version antrerior. | Placa completamente funcional                                | RS485 de alto consumo y en alimentación continua.                      |
+|    **Versión 1.a**    | Primera PCB fabricada                        | Distribución de alimentación en reposo y continua.       | Placa completamente funcional                                | La alimentación de resposo solo esta conectada con el compoente RS485. |
+| Version 1.b | Corte y cambio de pistas para la PCB inicial | Distribucion energética de compoenetes mas eficiente.    | Reducción del consumo en estado activo.                      | Componete RS485 de alto consumo en rposo                               |
+| Version 1.c | Cambio de compoente RS485 manualmente        | Optimización de consumo en rposo                         | Problema funcional de la placa, (mala practica de soldadura) | PCB sin funcionamiento. |
+|    **Versión 2.a**    | PCB con enrrutado nuevo                      | Compoentes divididos en su mayoria correctamente         | Placa completamente funcional                                | RS485 de alto consumo y en alimentación continua, falta de una pista.  |
+|    **Versión 3.a**    | PCB con enrrutado nuevo                      | Correccion de la pista faltante de la version antrerior. | Placa completamente funcional                                | RS485 de alto consumo y en alimentación continua.                      |
 
 Estas versiones se ejemplifican en esquemas a continuación para detallar los cambios de distribución energética de los compoentes que son alimentados con 5Vs y 5v respectivamente.
 
 <img title="a title" alt="Alt text" src="images\diagrama_versiones.png">
 
-### mejoras no realizadas
-
-Como mejoras no realizadas se tiene el cambio del componente de comunicación 485 de alto consumo debido a que es antiguo, aun más en esta versión ya que esta conectado en la alimentación constante por lo que este consume con el sistema en reposo.
+<br>
+- Mejoras no realizadas: como mejoras no realizadas se tiene el cambio del componente de comunicación 485 de alto consumo debido a que es antiguo, aun más en esta versión ya que esta conectado en la alimentación constante por lo que este consume con el sistema en reposo.
 ## Fabricación
 
 Con los archivos de una versión funcional del sistema (Versión N°2), se realizó un estudio en la fabricación de esta placa para tener una idea y obtener un analisis en terminos de los costos que tiene finalmente el "nodo sensor". 
@@ -109,17 +109,10 @@ Resultados y precios:
 Considerar además un precio extra en cuando a sensores y baterías del dispositivo de $100.92USD/unidad aprox.
 
 #### 4. Pros y contras
-1. Fabricación local:
-* Menos tiempo estimado de realización.
-* Menor precio estimado.
-* Ensamblado manual.
-* Dificultad de obtención de algunos componentes (stock limitado).
 
-2. Fabricacion Externa:
-* La placa llega para usar directamente.
-* Margen de optimización.
-* Mayor tiempo de espera.
-* Mayor precio.
+|    Fabricación Local    | Fabricacion Externa |
+|-----------------------------|----------------|
+| - Menos tiempo estimado de realización. <br> - Menor precio estimado. <br> - Ensamblado manual. <br> - Dificultad de obtención de algunos componentes (stock limitado).  |      - La placa llega para usar directamente. <br> - Margen de optimización. <br> - Mayor tiempo de espera. <br> - Mayor precio.       |
 
 ### Programación
 Hablando del software del dispositivo nodo sensor se poseen 2 versiones  con y sin SD para su funcionamiento, estos posee las siguentes caracteristicas:
