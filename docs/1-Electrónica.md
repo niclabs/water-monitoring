@@ -74,18 +74,16 @@ Con los archivos de una versión funcional del sistema (Versión N°2), se reali
 
 
 ### Cotización:
-Para cotizar se considero la posibilidad de una fabricación y ensablaje completamente externo con los componetes entregados por el fabricante.
+Para cotizar se consideró la posibilidad de una fabricación y ensamblaje completamente externo con los componetes entregados por el fabricante y otra con un emsamblado local con los componetes obtenidos mediantes distribuidores.
 
 #### 1. Fabricación y ensamblaje externo:
-Consireaciones:
+Consideraciones:
  * Para esta cotización se tomaron en cuenta los fabricantes: JLCPCB, PCBway, PCBgogo, EEcart, SeedStudio.
  * Los precios obtenidos son dados en base a cotizaciones rapidas entregadas por los fabricantes.
  * Los archivos requeridos para las cotizaciones Gerber (PCB), BOM (componentes) con un formato específico para cada fabricante y el *"pick and place"* en algunos casos.
  * La cotización fue realizada para una cantidad de 5 PCBs ensambladas (cantidad mínima aceptada).
 
  #### 2. Fabircación externa y ensamblado local:
- La cotización de esta opción la placa es fabricada de manera externa y los componetes cotizados a los distribuidores.
-
  Consideraciones:
 * El ensamblaje se consideró de manera manual.
 * Utilización de stencil para el ensamblado.
@@ -129,13 +127,13 @@ Para utilizar la PCB se requiere un previo montaje para su uso de cual consta de
 
 Para programar la placa esta debe estar **siempre alimentada**:
 
-5. Dejar el interruptor en FTDI.
-6. Conectar un adaptador FTDI-USB para su programación en el puerto FTDI y un adaptador RS485-USB si se realiza esta comunicación en la salida 485 de la PCB.
-7. Conectar solo el adaptador USB-FTDI al computador para pruebas.
+5. Dejar el **interruptor en FTDI**.
+6. Conectar un **adaptador FTDI-USB** para su programación en el puerto FTDI y un adaptador RS485-USB si se realiza esta comunicación en la salida 485 de la PCB.
+7. Conectar **solo** el adaptador USB-FTDI al computador para pruebas.
 
 La programación se realiza en Arduino IDE:
 
-8. Seleccionar el puerto de conexión correspondiente en la pestana herramentas.
+8. Seleccionar **el puerto** de conexión correspondiente en la pestaña herramentas.
 9. Selecionar  **Arduino Uno** en la pestaña herramientas.
 10. Cargar el código correspondiente.
 
@@ -143,16 +141,17 @@ Se puede verificar el funcionamento del programa en el monitor serial de Arduino
 
 #### Características.
 Para realizar cambios en el código o generar uno propio se tiene:
-1. Considerar el dispositivio como un arduino Uno.
+1. Considerar el dispositivio como un **Arduino Uno**.
 2. Importante habilitar el pin D3(alimentación) para la iniciar la SD.
 
 Conexiones:
-3. El pin D2 es entrada asociada a la señal de interrupción del RTC.
-4. El pin D3 es salida y habilita la Alimentación 5Vs.
-5. El pin D4 es salida y habilita el RS485 para que trabaje (Receptor y Emisor).
-6. El pin D9 es entrada con la señal del sensor de temperatura (1-wire).
-7. PC4 y PC5 conexión I2C proveniente del ADC que contiene los sensores de presión, turbidez, conductividad y pH.
-8. La SD tiene una conexión ISCP (pin 10-13).
+
+3. El **pin D2** es entrada asociada a la señal de interrupción del **RTC**.
+4. El **pin D3** es salida y habilita la **Alimentación 5Vs**.
+5. El **pin D4** es salida y habilita el **RS485** para que trabaje (Receptor y Emisor).
+6. El **pin D9** es entrada con la señal del sensor de **temperatura** (1-wire).
+7. **PC4 y PC5** conexión I2C proveniente del **ADC** que contiene los sensores de presión, turbidez, conductividad y pH.
+8. La **SD** tiene una conexión **ISCP (pin 10-13)**.
 
 
 ### Programación 2
