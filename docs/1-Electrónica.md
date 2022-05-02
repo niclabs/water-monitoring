@@ -113,8 +113,49 @@ Considerar además un precio extra en cuando a sensores y baterías del disposit
 |    Fabricación Local    | Fabricacion Externa |
 |-----------------------------|----------------|
 | - Menos tiempo estimado de realización. <br> - Menor precio estimado. <br> - Ensamblado manual. <br> - Dificultad de obtención de algunos componentes (stock limitado).  |      - La placa llega para usar directamente. <br> - Margen de optimización. <br> - Mayor tiempo de espera. <br> - Mayor precio.       |
-
 ### Programación
+Para el programa principal del dispositivo posee 2 versionescon y sin SD con un funcionamiento muy similar, en general, el código posee un tiempo de alarma de tomar medidas con los sensores y otra alarma para el envío de datos de manera serial, El dispositivo pasa de estar en reposo al realizar la tarea requerida en la alarma y volver a esta en reposo para un ahorro de consumo.
+
+Por otra parte para un eficiente envío de datos las medidas realizadas con su fecha y sensor correspondiente estan codificacdos de manera binaria para reducir el tiempo de envío, así hacer un envío más eficiente con más cantidad de datos en un menor tiempo reduciendo el consumo cuando el dispositivo esta activo. Para conocer mas detalles ver el apartado de codificación.
+
+Destacar que el los programas utilizaron las librerías: ASD1X15 para el ADC, DallasTemperature y OneWire para el sensor de temperatura, RTClib para el RTC, SDfat para la SD y una libreria propia para la codificacción.
+
+#### Uso y carga de código a la PCB.
+Para utilizar la PCB se requiere un previo montaje para su uso de cual consta de los siguientes pasos para su programación.
+1. Conectar los **sensores** a sus respectivos puertos.
+2. Insertar la **pila del RTC** en su respectivo módulo.(Si no posee alimentación la fecha siempre se reiniciará).
+3. Insetar la **tarjeta SD** en su ranura si se trabajará con ella.
+4. La **alimentación** puede ser de manera **externa** con la conexión correpondiente en el final de la PCB o mediante **baterías de litio** en los pines designados con su polo correspondiente.
+
+Para programar la placa esta debe estar **siempre alimentada**:
+
+5. Dejar el interruptor en FTDI.
+6. Conectar un adaptador FTDI-USB para su programación en el puerto FTDI y un adaptador RS485-USB si se realiza esta comunicación en la salida 485 de la PCB.
+7. Conectar solo el adaptador USB-FTDI al computador para pruebas.
+
+La programación se realiza en Arduino IDE:
+
+8. Seleccionar el puerto de conexión correspondiente en la pestana herramentas.
+9. Selecionar  **Arduino Uno** en la pestaña herramientas.
+10. Cargar el código correspondiente.
+
+Se puede verificar el funcionamento del programa en el monitor serial de Arduino IDE (Pestaña herramientas, monitor serie). Para el caso de ver el funcionamiento en comunicación 485, luego de cargar el programa desconectar el adaptador FTDI y conectar el 485 al computador, cambiar el interruptor a 485 y el funcionamiento se verá en el monitor serie.
+
+#### Características.
+Para realizar cambios en el código o generar uno propio se tiene:
+1. Considerar el dispositivio como un arduino Uno.
+2. Importante habilitar el pin D3(alimentación) para la iniciar la SD.
+
+Conexiones:
+3. El pin D2 es entrada asociada a la señal de interrupción del RTC.
+4. El pin D3 es salida y habilita la Alimentación 5Vs.
+5. El pin D4 es salida y habilita el RS485 para que trabaje (Receptor y Emisor).
+6. El pin D9 es entrada con la señal del sensor de temperatura (1-wire).
+7. PC4 y PC5 conexión I2C proveniente del ADC que contiene los sensores de presión, turbidez, conductividad y pH.
+8. La SD tiene una conexión ISCP (pin 10-13).
+
+
+### Programación 2
 Hablando del software del dispositivo nodo sensor se poseen 2 versiones  con y sin SD para su funcionamiento, estos posee las siguentes caracteristicas:
 1. Posee variables de los períodos de medida y envvío de datos: Es una de las características más importantes para la definición de tiempos de funcinamniento del sistema. La variable "Freq_sens" indica cada cuantos segundos tomada una medida de los sensores y la variable "Freq_send" representa el intervalo en segundos en el que son enviados los datos, claramente  Freq_send > Freq_sens  ya que deben existir datos medidos para ser enviados.
 2. Codificación de lectura de datos: Para realizar un envío más eficiente ya sea por velocidad, memoria, disminución de consumo energético en el momento de enviar datos se desarrolló una librería que codifique los datos para ello. Lo importante a destacar es qu exite una codificación de lectura y otra de envio explicada mas adelante.
