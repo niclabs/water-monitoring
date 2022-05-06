@@ -16,13 +16,16 @@ Este prototipo estuvo sumergido unos 45 minutos y al sacaro si tenía bastante h
 - Condiciones de uso
 <-->
 
+<!--
 ## Metodología: Diseño Orientado a la Manufactura (DfM)
+-->
 
 <!-- (TODO: revisar bien.) -->
 
+<!-->
 Luego del primer prototipo se trabajó junto a un equipo de diseñadores basados en la metodología Design for Manufacturing o Diseño Orientado a la Manufactura.
 
-Es una metodología de diseño que plantea principios fundamentales que guían las decisiones de diseño desde etapas tempranas del proceso creativo, con el objetivo de generar objetos o sistemas pensados para su fabricación, reduciendo así número de piezas, tiempos, costos, y recursos involucrados, para generar productos que respondan a los recursos disponibles en el proyecto de forma pertinente. En el Diseño Orientado a la Manufactura, se priorizan procesos y materiales disponibles de acuerdo a la escala de producción requerida, en el caso del nodo al ser un proyecto en etapa temprana, donde se prototipará a baja escala, se priorizará procesos locales y del menor costo posible. Además, la geometría de cada una de las piezas deberá ser diseñada para un proceso de fabricación en específico, priorizando piezas simétricas, además de utilizar piezas y componentes ya disponibles en el mercado para disminuir el número de piezas especiales a fabricar. Finalmente se deben escoger materiales que no solo cumplan con los requerimientos técnicos necesarios sino también que sean de bajo costo, y maquinables mediante los procesos de manufactura seleccionados. 
+Es una metodología de diseño que plantea principios fundamentales que guían las decisiones de diseño desde etapas tempranas del proceso creativo, con el objetivo de generar objetos o sistemas pensados para su fabricación, reduciendo así número de piezas, tiempos, costos, y recursos involucrados, para generar productos que respondan a los recursos disponibles en el proyecto de forma pertinente. En el Diseño Orientado a la Manufactura, se priorizan procesos y materiales disponibles de acuerdo a la escala de producción requerida, en el caso del nodo al ser un proyecto en etapa temprana, donde se prototipará a baja escala, se priorizará procesos locales y del menor costo posible. Además, la geometría de cada una de las piezas deberá ser diseñada para un proceso de fabricación en específico, priorizando piezas simétricas, además de utilizar piezas y componentes ya disponibles en el mercado para disminuir el número de piezas especiales a fabricar. Finalmente se deben escoger materiales que no solo cumplan con los requerimientos técnicos necesarios sino también que sean de bajo costo, y maquinables mediante los procesos de manufactura seleccionados. --> 
 
 ## Segundo prototipo
 
@@ -53,10 +56,26 @@ Hubo de todos los resultados, positivos donde el permanecio sumergido sin filtra
 
 <img title="a title" alt="Alt text" src="images/carcasa_validacion_3.jpg" width="300px">
 
-## Archivos de diseño y fabricación
+### Archivos de diseño y fabricación
 
 Se pueden encontrar los archivos de diseño, materiales e instrucciones en el siguiente link.
 
+https://github.com/niclabs/water-monitoring/tree/master/5.%20Hito%20Carcasa
+
+<img title="a title" alt="Alt text" src="images/Nodo completo.JPG">
+
+## Siguientes pasos
+
+Se puede ordenar el trabajo futuro en dos categorías dependiendo de su objetivo:
+
+##### To Do's:
+
+1. Disminución de costo de materiales.
+2. Estandarización de proceso de fabricación.
+
+##### To Fix:
+
+1. Revisar mecanismo de sellado y filtraciones.
 
 
 
