@@ -82,4 +82,9 @@ Conexiones:
 7. **PC4 y PC5** conexión I2C proveniente del **ADC** que contiene los sensores de presión, turbidez, conductividad y pH.
 8. La **SD** tiene una conexión **ISCP (pin 10-13)**.
 
+### Oportunidades de mejora
 
+#### To Do's
+
+1. Disminuir costo de fabricación.
+2. Mejorar autonomía del sistema.

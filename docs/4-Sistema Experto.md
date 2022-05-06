@@ -59,9 +59,9 @@ El sitio web es la culminación, y toma el trabajo realizado por todos los siste
 
 Para revisar el sitio web se puede entrar al  [enlace](http://agua.niclabs.cl:3001/) con las siguientes credenciales:
 
-|Usuario|Pass|
+| Usuario | Pass |
 |-|-|
-|pruebas|fondefagua|
+| pruebas | fondefagua |
 
 Se pueden observar algunos mock-ups.
 
