@@ -12,23 +12,6 @@ Se fabricó un primer prototipo para realizar pruebas con los sensores de presi�
 
 Este prototipo estuvo sumergido unos 45 minutos y al sacarlo si tenía bastante humedad dentro, pero no tenía un "pozo de agua", la humedad si era suficiente para que en el tiempo dañara la electrónica. Se cree que las filtraciones fueron por las tapas de los sensores de presión.xzx
 
-<!-->
-## Directrices de diseño (”requerimientos”)
-- Condiciones de uso
-<-->
-
-<!--
-## Metodología: Diseño Orientado a la Manufactura (DfM)
--->
-
-<!-- (TODO: revisar bien.) -->
-
-
-
-<!-->
-Luego del primer prototipo se trabajó junto a un equipo de diseñadores basados en la metodología Design for Manufacturing o Diseño Orientado a la Manufactura.
-
-Es una metodología de diseño que plantea principios fundamentales que guían las decisiones de diseño desde etapas tempranas del proceso creativo, con el objetivo de generar objetos o sistemas pensados para su fabricación, reduciendo así número de piezas, tiempos, costos, y recursos involucrados, para generar productos que respondan a los recursos disponibles en el proyecto de forma pertinente. En el Diseño Orientado a la Manufactura, se priorizan procesos y materiales disponibles de acuerdo a la escala de producción requerida, en el caso del nodo al ser un proyecto en etapa temprana, donde se prototipará a baja escala, se priorizará procesos locales y del menor costo posible. Además, la geometría de cada una de las piezas deberá ser diseñada para un proceso de fabricación en específico, priorizando piezas simétricas, además de utilizar piezas y componentes ya disponibles en el mercado para disminuir el número de piezas especiales a fabricar. Finalmente se deben escoger materiales que no solo cumplan con los requerimientos técnicos necesarios sino también que sean de bajo costo, y maquinables mediante los procesos de manufactura seleccionados. --> 
 
 En la siguiente etapa se comenzó a diseñar a nivel general el dispositivo priorizando materiales accesibles y disponibles en el mercado local. La geometría inicial contempla un tubo de acrílico transparente, tapas y un soporte interno para la electrónica, además de espacios laterales para la salida de los sensores y cable UTP, como se muestra en la Figura 11. Las tapas laterales (Figura 12) realizan el sello total del dispositivo en esta versión, mediante o'rings y fijándose al soporte interno que es lo que mantendrá las tapas a presión dentro del sistema generando la protección deseada IP69.
 
@@ -41,6 +24,7 @@ El sistema se prototipo y se realizaron diferentes pruebas a  los componentes de
 <img title="a title" alt="Alt text" src="images/carcasa_prototipo_1.jpg" width="300px">
 
 Se fueron ajustando partes hasta que no hubo filtraciones. :)
+
 <img title="a title" alt="Alt text" src="images/carcasa_prototipo_2.jpg" width="300px">
 
 Se probó este ptototipo luego en un pozo en el sector de Laguna Caren, aquí se realizaron pruebas sumergiendolo a mayores profundidades progresivamente (10, 20, 30 y 40mt).

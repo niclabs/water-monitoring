@@ -1,6 +1,5 @@
 # 💻 Electrónica
 
-## Diseño
 
 Primeras versiones del sistema de captura de datos tenían el objetivo de ser utilizados para realizar los experimentos con los sensores y prototipar primeras versiones de la electrónica que se sumergiría en el agua.
 
@@ -39,7 +38,7 @@ Ambas opciones tiene un costo cercano a los 200 dolares americanos por placa. Pu
 | **Opción Externa PCBWay**          | $888.45        | $1176.19       | $231.00             | 5.5 semanas |
 -->
 
-### Uso y programación
+## Uso y programación
 
 <img title="a title" alt="Alt text" src="images/PCBnombrada_v0.png">
 
@@ -82,7 +81,7 @@ Conexiones:
 7. **PC4 y PC5** conexión I2C proveniente del **ADC** que contiene los sensores de presión, turbidez, conductividad y pH.
 8. La **SD** tiene una conexión **ISCP (pin 10-13)**.
 
-### Oportunidades de mejora
+## Oportunidades de mejora
 
 #### To Do's
 
