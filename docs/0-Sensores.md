@@ -30,112 +30,65 @@ Se seleccionaron los sensores en la siguiente tabla para medir las variables fis
 
 Por lo general se sometió a los sensores a tipos de pruebas que permitieran evaluar dos dimensiones principales de su comportamiento: (1) su presición y (2) su desempeño por periodos prolongados de sumersión en medio acuático ('sensor drift'). 
 
-## Temperatura
+## Estado de resultados
 
+| Variable                   | Aprobado | Estado | Comentarios |
+| -------------------------- | -------- | ------ | ----------- |
+| Temperatura | ✅ Buenos resultados |        |             |
+| Presión     | ✅ Buenos resultados |        |             |
+| pH          | ✅ Buenos resultados |        |             |
+| Conductividad Eléctrica | ⚠️ Se realizarán más experimentos |        |             |
+| Turbiedad   | ❌ No aprobado, se buscarán otros modelos |        |             |
+
+### Temperatura
 
 <img title="a title" alt="Alt text" src="images/sensor_temp.png" width="200px">
-<img title="a title" alt="Alt text" src="images/sensor_temp_experimento1_foto.jpg" width="300px">
 <img title="a title" alt="Alt text" src="images/sensor_temp_experimento1.png" width="300px">
 
-Experimentos demostraron un buen desempeño del sensor en su comportamiento en el tiempo
+Experimentos demostraron un buen desempeño del sensor en su comportamiento en el tiempo. Algunas observaciones:
 
-- comportamiento súper predecible.
-- se debe ajustar el offset inicial.
-- después de un tiempo se puede observar una leve desviación de la medidas, pero se puede corregir completamente reajustando el offset.
-- errores menores a 0.5ºC y 1ºC
-
-TODO: - Colocar sensor de referencia para saber cuál es.
+- Comportamiento muy predecible, después de un tiempo se puede observar una muy leve desviación lineal constante de la medidas, pero se puede corregir completamente reajustando un offset.
+- Errores menores a 0.5ºC luego de 2 meses  de uso prolongado sin recalibrar. Luego de 9 meses de uso error en mediciones aumento pero se mantiene menor a los 0.5ºC al recalibrar. 
 
 <img title="a title" alt="Alt text" src="images/sensor_temp_plot_hist.png">
 
-- Error de dos sensores ds18b20 el primer mes de medición:
-TODO: (se puede corregir por offset el error 1? indicar que sensores tenían un poco de uso ya?)
-
-<img title="a title" alt="Alt text" src="images/sensor_temp_experimento1_error.png" width="400px">
-
-- Error de sensores luego de 7 meses de uso. Experimento dura 1 mes.
-
-<img title="a title" alt="Alt text" src="images/sensor_temp_experimento3_error.png" width="400px">
-
-- Se desarrolla nueva metodología hacia últimos experimentos: ver perfil de medición en el rango. Se observa algo de histéresis en ambos sensores para la bajada.
-TODO: (considerar rápidez en la toma de datos, existe histéresis en la bajada de temperatura para cambios rápidos)
-
-
-<img title="a title" alt="Alt text" src="images/sensor_temp_experimento3_perfil_inicial.png" width="700px">
-<img title="a title" alt="Alt text" src="images/sensor_temp_experimento3_rmse_perfil.png" width="500px">
-
-## Conductividad
+### Conductividad
 
 <img title="a title" alt="Alt text" src="images/sensor_tds.png" width="300px">
 
-TODO: (fotos del experimento)
-TODO: al medir dos sensores de conductividad se afectan la medida. Pero el de conductividad con pH o presión o temp no.
+Algunas observaciones:
 
-- Ojo: Documentación indica rango [0,2000 uS/cm] ([link producto](https://www.dfrobot.com/product-1662.html))
+- Al medir dos al mismo tiempo se afectan la medida.
+- Es súper clara la medición dentro del rango de 0 - 1500 uS/cm.
+    - Al medir hasta 1500 uS/cm errores se mantienen bajo los 50 uS/cm. Al medir hasta 2000 uS/cm error medio se mantiene entre 100 - 200 uS/cm.
 
-- Perfil de medición luego de 1 mes de experimento:
-    - metodología incluye sensor de control.
-    - desgaste irrecuperable del sensor sumergido.
-    - no se ve histéresis y tampoco en los datos
+- Luego de 3 meses de uso continuo, sensor pierde su calibración Se esperan más experimentos para ver si es por depositos de minerales en el sensor, o si es corregible, o fue un error puntual, o etc.
+- No se ve histéresis importante.
 
-<img title="a title" alt="Alt text" src="images/sensor_tds_experimento3_perfil_ini.png" width="500px">
-
-<img title="a title" alt="Alt text" src="images/sensor_tds_experimento3_perfil_fin.png" width="500px">
-
-- Si es importante la saturación sobre los valores ~1500 uS/cm y ~2000 uS/cm.
-
-<img title="a title" alt="Alt text" src="images/sensor_tds_experimento3_rmse_rango.png" width="500px">
-
-- Se esperan más experimentos para ver si es por depositos de minerales en el sensor, o si es corregible, o fue un error puntual, o etc.
-
-## pH
+### pH
 
 <img title="a title" alt="Alt text" src="images/sensor_ph.jpeg" width="300px">
 
-TODO: fotos experimento
+- No se ve mucha histéresis. Hay harta variación en la calibración pero al recalibrar los sensores vuelven a funcionar.
+- Se esperar hacer más experimento para corroborar datos y además poder ir estimando que tan rápido se descalibran los datos, y cuánto se va perdiendo de presición con cada recalibración.
 
-- no se ve mucha histéresis
-- hay harta variación en la calibración pero es posible recalibrarla y los sensores vuelven a funcionar.
-- se esperar hacer más experimento para corroborar datos y además poder ir estimando que tan rápido se descalibran los datos, y cuánto se va perdiendo de presición con cada recalibración.
-
-- Perfil inicial del experimento:
-<img title="a title" alt="Alt text" src="images/sensor_ph_experimento3_perfil_ini.png" width="500px">
-
-- Perfil al final del experimento sin recalibrar:
-<img title="a title" alt="Alt text" src="images/sensor_ph_experimento3_perfil_int.png" width="500px">
-
-- Perfil final con recalibración de los sensores:
-<img title="a title" alt="Alt text" src="images/sensor_ph_experimento3_perfil_fin.png" width="500px">
-
-
-## Nivel de Agua
+### Nivel de Agua
 
 <img title="a title" alt="Alt text" src="images/sensor_presion.png" width="200px">
 <img title="a title" alt="Alt text" src="images/sensor_presion_atm.png" width="200px">
 
-- Se utilizan dos sensores para calcular la columna de agua 
-- TODO: Poner sensores dereferencia para ambos casos.
+- Para medir el nivel de una columna de agua se usan dos sensores: uno en el fondo del pozo y otro en la superficie para corregir las variaciones en la presión atmosférica que también siente el sensor sumergido. 
+- Experimentos fueron positivos, el error de medición fue menor a 1 cm en diferentes experimentos y luego de 3 meses de medición continua equipo sigue midiendo correctamente, no se observa desviación en su medición.
 
-<img title="a title" alt="Alt text" src="images/sensor_presion_experimento1_0.png" width="300px">
 <img title="a title" alt="Alt text" src="images/sensor_presion_experimento1_1.jpeg" width="300px">
 <img title="a title" alt="Alt text" src="images/sensor_presion_experimento1_2.jpeg" width="300px">
+<img title="a title" alt="Alt text" src="images/sensor_presion_experimento1_0.png" width="300px">
 
-<img title="a title" alt="Alt text" src="images/sensor_presion_experimento1.png" width="1000px">
-<img title="a title" alt="Alt text" src="images/sensor_presion_experimento1_rmse.png" width="350px">
-
-- últimos experimentos fueron en baldes de agua y mato, porque muy poca altura asi que el desempeño fue peor, pero este no empeoró luego de 6 meses con sensores sumergidos.
-
-<img title="a title" alt="Alt text" src="images/sensor_presion_experimento3_rmse.png" width="300px">
-
-## turbidez
+### Turbidez
 
 <img title="a title" alt="Alt text" src="images/sensor_turbidez.png" width="200px">
 
-- primeros experimento dieron cualquier cosa, dificultad en uso de sensor muy delicados a la luz y otras variables dificiles de controlar.
-
-<img title="a title" alt="Alt text" src="images/sensor_turbidez_experimento1.png" width="500px">
-
+- Sensores son muy sensibles a la luz, entonces mediciones varían ampliamente dependiendo de la luz ambiente y la posición en que se coloquen, cualquier movivmiento o cambio de alguna de estas condiciones afectará la medición.
 - Errores del rango de ~1000 NTU. No confiables, quizás solo apra alertas grandes pero mejor seguir buscando.
-
-<img title="a title" alt="Alt text" src="images/sensor_turbidez_experimento2_1.png" width="500px">
-
+## Aprendizajes
+- tener un buen setup del experimento

@@ -3,7 +3,7 @@
 ## Diseño
 El dispositivo de electronica (nodo sensor) diseñado para el monitoreo de de agua en intervalos de tiempo de manera autónoma, esta basado en tomar las medidas con sesores para ser enviadas mediante comunicación serial a un sistema de comunicación para el monitoreo de estas características, este dispositivo tomará medidas de pH, Condutividad, turbidez, temperatura y presión.
 
-\*imagen sistema completo resaltando el nodo sensor*
+*imagen sistema completo resaltando el nodo sensor*
 
 ### Prototipo
 Como prototipo  se realizó un circuito en Arduino para realizar pruebas con sesores, medidas y comunicación para obtener una versión funcional que pudiera enviar los datos. Este prototipo su funcionamiento principal se basa en dos estados principalmente Reposo (Sleep), estado en el cual se esta en bajo consumo y sin trabajo de meddidas y segundo activo que esta encargado de tomar las medidas de los sensores, guardar estos datos de manera codificada y enviarlos de manera serial con comunicación 485.
