@@ -1,6 +1,8 @@
 # Bitácora Proyecto Fondef IDeA ID19I10363
 *Sistema abierto experto para apoyar la gestión de recursos hídricos mediante monitoreo de bajo costo en tiempo real de aguas superficiales y subterráneas*
 
+<iframe  title="YouTube video player" width="480" height="390" src="https://www.youtube.com/watch?v=SJs9-OBhGeA" frameborder="0" allowfullscreen></iframe>
+
 ## Resumen de docsify
 En el directorio raíz de la documentación (`/docs`) hay un archivo `README.md` y otros directorios. El archivo `README.md` de cada directorio es el archivo principal que será cargado por defecto al acceder a una nueva ubicación; por ejemplo, este texto está en la ruta `/docs/README.md`. Si desea modificar la página principal de [Grupo Sensores](1-sensores/README.md), basta editar el archivo `/docs/1-sensores/README.md`. Si desea modificar otra página de dicho directorio, como [Homologación](1-sensores/homologacion.md), basta editar `/docs/1-sensores/homologacion.md`.
 
