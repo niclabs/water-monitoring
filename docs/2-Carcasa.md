@@ -3,8 +3,6 @@
 Revisaremos el diseño y construcción de una carcasa incorporada al nodo sensor con factibilidad de ser desplegada en aguas superficiales y subterráneas. Se han realizado pruebas en ambiente controlado (laboratorio) sumergiendo la carcasa en tanques de agua por diferentes períodos de tiempo y evaluando efectividad en la protección del interior de acuerdo al grado de protección IP alcanzado (norma internacional CEI 60529 Degrees of Protection).
 
 
-
-
 Se fabricó un primer prototipo para realizar pruebas con los sensores de presión (nivel de agua) para sumergirlos en un pozo de unos ~5 metros. Se usaron materiales de plomería genéricos y se rellenó con arroz para absorver la humedad en caso de filtraciones.
 
 <img title="a title" alt="Alt text" src="images/carcasa_primera_version_2.png" width="200px">
