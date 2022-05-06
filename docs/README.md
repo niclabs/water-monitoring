@@ -1,14 +1,19 @@
-# Bitácora Proyecto Fondef IDeA ID19I10363
-*Sistema abierto experto para apoyar la gestión de recursos hídricos mediante monitoreo de bajo costo en tiempo real de aguas superficiales y subterráneas*
 
-<iframe  title="YouTube video player" width="480" height="390" src="https://www.youtube.com/watch?v=SJs9-OBhGeA" frameborder="0" allowfullscreen></iframe>
+<h1 style="text-align:center;color:#000610"> Proyecto Open Water </h1>
 
-## Resumen de docsify
-En el directorio raíz de la documentación (`/docs`) hay un archivo `README.md` y otros directorios. El archivo `README.md` de cada directorio es el archivo principal que será cargado por defecto al acceder a una nueva ubicación; por ejemplo, este texto está en la ruta `/docs/README.md`. Si desea modificar la página principal de [Grupo Sensores](1-sensores/README.md), basta editar el archivo `/docs/1-sensores/README.md`. Si desea modificar otra página de dicho directorio, como [Homologación](1-sensores/homologacion.md), basta editar `/docs/1-sensores/homologacion.md`.
+<h6 style="text-align:center;color:DodgerBlue;"> Fondef IDeA ID19I10363: Sistema abierto experto para apoyar la gestión de recursos hídricos mediante monitoreo de bajo costo en tiempo real de aguas superficiales y subterráneas </h6>
 
-## Sidebar
-En el directorio raíz también hay un archivo llamado `_sidebar.md`. Si desea agregar una nueva página a la barra lateral, sólo debe editar `/docs/_sidebar.md` y agregar el hipervínculo a la lista Markdown. Si agrega páginas de un subdirectorio, procure mantener la jerarquía de la lista indentando con espacios.
 
+[![Everything Is AWESOME](images/homepage_video_image.png)](https://www.youtube.com/watch?v=SJs9-OBhGeA)
+
+<p style="text-align:justify;">
+En enero del 2020 el consorcio formado por NIC Labs, el Departamento de Ingeniería Eléctrica y Geología de la Universidad de chile, y además empresas externas, propusieron diseñar y desarrollar un prototipo experimental con el objetivo de ligrar tener un sistema de medición multiparamétrico abierto, con el cual se pueda masificar el monitoreo de la calidad de agua tanto superficial como subterranea, con la adaptación de la tecnología de bajo costo.
+
+La investigación científica es llevada a desarrollo mediante fondos otorgados por FONDEF ID19I10363.
+</p>
+
+<!--
 <b>Editar bitacora</b>
 
 Referirse a la página [como editar](old/como-editar.md).
+-->
