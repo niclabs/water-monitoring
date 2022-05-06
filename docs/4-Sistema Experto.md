@@ -69,7 +69,7 @@ Se pueden observar algunos mock-ups.
 |-|
 |Sitio web de visualización de datos|
 
-|<img title="a title" alt="Alt text" src="images\sisexp_web_descarga.png">|
+|<img title="a title" alt="Alt text" src="images\sisexp_web_descarga.png" width = "500px">|
 |-|
 |Pestaña de descarga de datos|
 
