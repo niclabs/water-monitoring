@@ -8,13 +8,6 @@ TODO: terminar de analizar íultimos datos.
 TODO: poner tabla de resuemn resultados sensores.
 -->
 
-<img title="a title" alt="Alt text" src="docs/images/sensor_agua.png">
-
-Los sensores otorgarán el input de información y de ellos dependerá la calidad de los datos en el sistema. Por esto son de vital importancia dado que mejores datos se espera lleven a mejores estimaciones y alertas. Pero mejores sensores implican un mayor costo, y se espera generar un sistema de monitoreo acequible.
-
-El objetivo entonces es encontrar sensores económico cuya calidad de medición sea la suficiente para operar el sistema, entendiendo que los sensores profesionales por lo general tienen un desempeño y una presición mayor de la necesaria para el análisis de agua.
-
-## Opciones
 Se seleccionaron los sensores en la siguiente tabla para medir las variables fisicoquímicas de: Temperatura, Conductividad, pH, Nivel de agua y Turbidez.
 
 | Variable                   | Modelo Sensor                    | Rango                                       | Error                              | Resolución                       |
