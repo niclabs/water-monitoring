@@ -1,8 +1,0 @@
-BasedOnStyle: Mozilla
-IndentWidth: '4'
-PointerAlignment: Right
-AlwaysBreakAfterReturnType: None
-AlwaysBreakAfterDefinitionReturnType: None
-AlignConsecutiveMacros: 'true'
-AlignConsecutiveAssignments: 'true'
-
