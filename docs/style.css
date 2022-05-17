@@ -338,9 +338,4 @@ img.medium-zoom-image {
 .content .markdown-section .content .markdown-section ol>li>ul:not(.task-list)>li>ol>li:before {
 	content: counter(li-counter, lower-roman);
 }
-
-/* Share Links */
-a.fab,
-a.fab:hover {
-    color: white;
-}
+--sidebar-nav-link-color--hover               : yellow;
