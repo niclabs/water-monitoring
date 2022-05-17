@@ -110,7 +110,6 @@ article h1 {
 .sidebar ul li p {
     font-size: 0.9rem;
     font-weight: 600;
-    color: white;
 }
 .sidebar ul li ul a,
 .sidebar ul li ul p {
@@ -127,7 +126,7 @@ article h1 {
 }
 .sidebar ul li .emoji {
     font-size: 1rem;
-    color: yellow
+
 }
 
 /* Content ----------------------- */
