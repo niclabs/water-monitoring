@@ -79,6 +79,7 @@ article h1 {
 }
 .markdown-section .anchor span {
     color: #01295c;
+
 }
 .markdown-section kbd {
     position: relative;
@@ -87,7 +88,7 @@ article h1 {
     border-left-width: 2px;
     border-right-width: 3px;
     border-bottom-width: 4px;
-    border-bottom-color: #cbcbcb;
+    border-bottom-color: yellow;
     border-radius: 3px;
 }
 .markdown-section .warn {
@@ -100,7 +101,6 @@ article h1 {
     line-height: normal;
     text-overflow: initial;
     white-space: normal;
-        color: yellow;
 }
 .sidebar ul li a,
 .sidebar ul li p {
