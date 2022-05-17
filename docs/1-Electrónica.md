@@ -1,7 +1,7 @@
 # 💻 Electrónica
 
 
-Primeras versiones del sistema de captura de datos tenían el objetivo de ser utilizados para realizar los experimentos con los sensores y prototipar primeras versiones de la electrónica que se sumergiría en el agua.
+Primeras versiones 2 del sistema de captura de datos tenían el objetivo de ser utilizados para realizar los experimentos con los sensores y prototipar primeras versiones de la electrónica que se sumergiría en el agua.
 
 Las funcionalidad de ambos es casi la misma: leer sensores ambientales, almacenar datos temporales. Para el caso del prototipo a sumergir en los acuíferos la información además debe ser comunicada al exterior y debe poder funcionar de manera autónoma por semanas a las vez.
 
