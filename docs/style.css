@@ -88,7 +88,7 @@ article h1 {
     border-left-width: 2px;
     border-right-width: 3px;
     border-bottom-width: 4px;
-    border-bottom-color: yellow;
+    border-bottom-color: #yellow;
     border-radius: 3px;
 }
 .markdown-section .warn {
