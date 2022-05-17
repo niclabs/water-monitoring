@@ -58,7 +58,7 @@ article h1 {
 /* Headings */
 .app-nav:not(:empty) ~ main .markdown-section {
     padding-top: 6rem;
-    color: #yellow;
+    color: #01295c;
 }
 
 .markdown-section h1 {
@@ -103,6 +103,7 @@ article h1 {
     line-height: normal;
     text-overflow: initial;
     white-space: normal;
+    color: yellow
 }
 .sidebar ul li a,
 .sidebar ul li p {
