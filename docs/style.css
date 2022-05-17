@@ -103,7 +103,6 @@ article h1 {
     line-height: normal;
     text-overflow: initial;
     white-space: normal;
-    color: #yellow
 }
 .sidebar ul li a,
 .sidebar ul li p {
@@ -111,7 +110,8 @@ article h1 {
     font-weight: 600;
     color: white;
 }
-.sidebar ul li ul a,
+.sidebar ul li ul a{
+color: yellow}
 .sidebar ul li ul p {
     font-size: 0.8rem;
     font-weight: 400;
