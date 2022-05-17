@@ -1,0 +1,24 @@
+CHANNEL_1= EC
+CHANNEL_2= pH
+
+Calibración EC: Time: 2021-03-11 13:50:05
+
+
+Solución calibradora de 1413 microsiemens/cm
+
+Valor en equilibrio
+920-921
+
+Valor en el aire
+12
+
+
+Calibración pH
+Solución de 4.01
+
+promedio 
+228
+
+Solución de 7.01
+
+promedio 693 (692.93)
