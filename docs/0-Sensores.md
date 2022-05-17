@@ -69,9 +69,8 @@ Experimentos demostraron un buen desempeño del sensor en su comportamiento en e
 Algunas observaciones:
 
 - Al medir dos al mismo tiempo se afectan la medida.
-- Es súper clara la medición dentro del rango de 0 - 1500 uS/cm.
-    - Al medir hasta 1500 uS/cm errores se mantienen bajo los 50 uS/cm. Al medir hasta 2000 uS/cm error medio se mantiene entre 100 - 200 uS/cm.
-
+- Es súper clara la medición dentro del rango de 0-1500 uS/cm.
+    - Al medir hasta 1500 uS/cm errores se mantienen bajo los 50 uS/cm. Al medir hasta 2000 uS/cm error medio se mantiene entre 100-200 uS/cm.
 - Luego de 3 meses de uso continuo, sensor pierde su calibración Se esperan más experimentos para ver si es por depositos de minerales en el sensor, o si es corregible, o fue un error puntual, o etc.
 - No se ve histéresis importante.
 
