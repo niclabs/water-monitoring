@@ -339,16 +339,8 @@ img.medium-zoom-image {
 	content: counter(li-counter, lower-roman);
 }
 
-/* CODE */
-.content .markdown-section code {
-	color: yellow;
-	background-color: #f2f2f2;
-	border: 1px solid #dbdbdb;
-	border-radius: 2px;
-}
-.content .markdown-section pre>code {
-    color: inherit;
-    background-color: inherit;
-    border: inherit;
-    border-radius: inherit;
+/* Share Links */
+a.fab,
+a.fab:hover {
+    color: white;
 }
