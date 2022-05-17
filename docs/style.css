@@ -111,6 +111,7 @@ article h1 {
 .sidebar ul li ul p {
     font-size: 0.8rem;
     font-weight: 400;
+    color: yellow;
 }
 .sidebar ul li.active > a {
     border-right: 4px solid;
