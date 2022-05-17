@@ -338,4 +338,7 @@ img.medium-zoom-image {
 .content .markdown-section .content .markdown-section ol>li>ul:not(.task-list)>li>ol>li:before {
 	content: counter(li-counter, lower-roman);
 }
+:root {
 --sidebar-nav-link-color--hover               : yellow;
+ --sidebar-name-color                          : yellow;
+}
