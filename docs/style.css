@@ -20,10 +20,6 @@
     --heading-h2-margin: 2rem 0 1rem 0;
     --heading-h3-margin: 1.875rem 0 0 0;
     --heading-h4-margin: 1.75rem 0 0 0;
-    --sidebar-toggle-background: #ceedef;
-    --sidebar-toggle-icon-color: #298596; 
-    --sidebar-toggle-border-color: transparent;
-    --sidebar-toggle-offset-top: calc(45px - (var(--sidebar-toggle-height) / 2));
     --sidebar-nav-link-font-weight--hover: unset;
     --sidebar-nav-indent: 10px;
     --link-color: #284472;
@@ -32,7 +28,6 @@
 
 /*cuerpo */
 body { 
-    color: #062a5e;
     background: white
 }
 .markdown-section {
@@ -47,54 +42,10 @@ article h1 {
 }
 
 
-/* Search bar*/
-.search input:focus {
-    box-shadow: none;
-    border-color: #898d8f ;
-}
-
-
-
 /* Headings */
 .app-nav:not(:empty) ~ main .markdown-section {
     padding-top: 6rem;
     color: #01295c;
-}
-
-.markdown-section h1 {
-    border-bottom: 3px solid #298596;
-    margin-bottom: 2rem;
-}
-.markdown-section h1 a>span {
-    color: #01295c;
-}
-.markdown-section h1 a:hover {
-    color: #01295c;
-    cursor: pointer;
-}
-.markdown-section h1 a:hover,
-.markdown-section h2 a:hover,
-.markdown-section h3 a:hover,
-.markdown-section h4 a:hover,
-.markdown-section h5 a:hover {
-    text-decoration: none !important;
-}
-.markdown-section .anchor span {
-    color: #01295c;
-
-}
-.markdown-section kbd {
-    position: relative;
-    top: -0.15rem;
-    font-size: 0.75rem;
-    border-left-width: 2px;
-    border-right-width: 3px;
-    border-bottom-width: 4px;
-    border-bottom-color: #cbcbcb;
-    border-radius: 3px;
-}
-.markdown-section .warn {
-    margin: 1rem 0;
 }
 
 /* Sidebar */
