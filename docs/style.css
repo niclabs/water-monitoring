@@ -342,7 +342,7 @@ img.medium-zoom-image {
 /* CODE */
 .content .markdown-section code {
 	color: #454647;
-	background-color: #yellow;
+	background-color: yellow;
 	border: 1px solid #dbdbdb;
 	border-radius: 2px;
 }
