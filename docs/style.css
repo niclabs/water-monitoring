@@ -114,10 +114,10 @@ article h1 {
 }
 .sidebar ul li.active > a {
     border-right: 4px solid;
-    color: yellow;
 }
 .sidebar ul li ul {
     margin-bottom: 14px;
+        color: yellow;
 }
 .sidebar ul li .emoji {
     font-size: 1rem;
