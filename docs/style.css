@@ -339,3 +339,16 @@ img.medium-zoom-image {
 	content: counter(li-counter, lower-roman);
 }
 
+/* CODE */
+.content .markdown-section code {
+	color: #454647;
+	background-color: #yellow;
+	border: 1px solid #dbdbdb;
+	border-radius: 2px;
+}
+.content .markdown-section pre>code {
+    color: inherit;
+    background-color: inherit;
+    border: inherit;
+    border-radius: inherit;
+}
