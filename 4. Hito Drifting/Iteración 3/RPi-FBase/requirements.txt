@@ -158,7 +158,7 @@ spidev==3.4
 ssh-import-id==5.7
 sysv-ipc==1.1.0
 thonny==3.3.3
-tornado==5.1.1
+tornado==6.3.2
 touchphat==0.0.1
 traitlets==4.3.2
 twython==3.7.0
