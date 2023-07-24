@@ -48,7 +48,7 @@ google-crc32c==1.1.2
 google-resumable-media==1.2.0
 googleapis-common-protos==1.52.0
 gpiozero==1.5.1
-grpcio==1.35.0
+grpcio==1.53.0
 guizero==0.6.0
 html5lib==1.0.1
 httplib2==0.19.0
